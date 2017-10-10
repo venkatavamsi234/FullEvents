@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 import CoreData
 
 @UIApplicationMain
@@ -14,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let notificationKey =  Notification.Name(rawValue: "Dismiss safari")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -43,6 +46,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if let str = url.query {
+            let strng =  str.components(separatedBy: "=")
+            getAccessToken(str: strng[1])
+        }
+
+        return true
+    }
+
+    func getAccessToken(str: String){
+        
+        let url = try! "https://fullcreative.fullauth.com/o/oauth2/v1/token".asURL()
+        
+        let params: [String: Any] = ["code": str,
+                                     "client_id": "29354-4dfad15c1bcc7b057adb96651882db0f",
+                                     "client_secret" : "uZkwpajg8ZjQ6wYAJcJ-1PErhQONEvYDbVagHLB6",
+                                     "redirect_uri": "com.fullCreative.FullEvents:/oauth2callback",
+                                     "grant_type": "authorization_code"
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.httpBody, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseData { (
+            response) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    
+                    let tokenToAccess = json["access_token"]
+                    
+                    if let accessToken = tokenToAccess.string{
+                        
+                        let userDefaults = UserDefaults.standard
+                        userDefaults.set(accessToken, forKey: "token")
+                        UserDefaults.standard.synchronize()
+                        
+                    }
+                    
+                    NotificationCenter.default.post(name: self.notificationKey, object: self)
+                    
+                }
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+    }
+    
 
     // MARK: - Core Data stack
 

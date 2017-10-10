@@ -7,23 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265DF5170992BC6CE3B1EC58 /* Pods_FullEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */; };
 		CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */; };
-		CE8E00901F8B77D700D0EF7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E008F1F8B77D700D0EF7E /* ViewController.swift */; };
 		CE8E00931F8B77D700D0EF7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00911F8B77D700D0EF7E /* Main.storyboard */; };
 		CE8E00961F8B77D700D0EF7E /* FullEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00941F8B77D700D0EF7E /* FullEvents.xcdatamodeld */; };
 		CE8E00981F8B77D700D0EF7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00971F8B77D700D0EF7E /* Assets.xcassets */; };
 		CE8E009B1F8B77D700D0EF7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00991F8B77D700D0EF7E /* LaunchScreen.storyboard */; };
+		CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */; };
+		CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */; };
+		CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */; };
+		CE8E00A91F8BF3AE00D0EF7E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */; };
+		CE8E00AB1F8C9A3300D0EF7E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00AA1F8C9A3300D0EF7E /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FullEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.release.xcconfig"; sourceTree = "<group>"; };
+		5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		CE8E008A1F8B77D700D0EF7E /* FullEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE8E008F1F8B77D700D0EF7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE8E00921F8B77D700D0EF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE8E00951F8B77D700D0EF7E /* FullEvents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullEvents.xcdatamodel; sourceTree = "<group>"; };
 		CE8E00971F8B77D700D0EF7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE8E009A1F8B77D700D0EF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8E009C1F8B77D700D0EF7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CE8E00AA1F8C9A3300D0EF7E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				265DF5170992BC6CE3B1EC58 /* Pods_FullEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C7515C839B4AA737BDDDC76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */,
+				4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A84D42252F73CF97679AA74D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE8E00811F8B77D700D0EF7E = {
 			isa = PBXGroup;
 			children = (
 				CE8E008C1F8B77D700D0EF7E /* FullEvents */,
 				CE8E008B1F8B77D700D0EF7E /* Products */,
+				5C7515C839B4AA737BDDDC76 /* Pods */,
+				A84D42252F73CF97679AA74D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,12 +89,16 @@
 			isa = PBXGroup;
 			children = (
 				CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */,
-				CE8E008F1F8B77D700D0EF7E /* ViewController.swift */,
+				CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */,
+				CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */,
+				CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */,
+				CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */,
 				CE8E00911F8B77D700D0EF7E /* Main.storyboard */,
 				CE8E00971F8B77D700D0EF7E /* Assets.xcassets */,
 				CE8E00991F8B77D700D0EF7E /* LaunchScreen.storyboard */,
 				CE8E009C1F8B77D700D0EF7E /* Info.plist */,
 				CE8E00941F8B77D700D0EF7E /* FullEvents.xcdatamodeld */,
+				CE8E00AA1F8C9A3300D0EF7E /* .gitignore */,
 			);
 			path = FullEvents;
 			sourceTree = "<group>";
@@ -74,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE8E009F1F8B77D700D0EF7E /* Build configuration list for PBXNativeTarget "FullEvents" */;
 			buildPhases = (
+				89180A98CA50BA13A352C641 /* [CP] Check Pods Manifest.lock */,
 				CE8E00861F8B77D700D0EF7E /* Sources */,
 				CE8E00871F8B77D700D0EF7E /* Frameworks */,
 				CE8E00881F8B77D700D0EF7E /* Resources */,
+				0585C93A0F9821C4B9DAC546 /* [CP] Embed Pods Frameworks */,
+				075A8E129698F2274FCE6E19 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8E00AB1F8C9A3300D0EF7E /* .gitignore in Resources */,
 				CE8E009B1F8B77D700D0EF7E /* LaunchScreen.storyboard in Resources */,
 				CE8E00981F8B77D700D0EF7E /* Assets.xcassets in Resources */,
 				CE8E00931F8B77D700D0EF7E /* Main.storyboard in Resources */,
@@ -134,14 +174,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0585C93A0F9821C4B9DAC546 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FullAuthIOSClient/FullAuthIOSClient.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FullAuthIOSClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		075A8E129698F2274FCE6E19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89180A98CA50BA13A352C641 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FullEvents-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE8E00861F8B77D700D0EF7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8E00901F8B77D700D0EF7E /* ViewController.swift in Sources */,
+				CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */,
+				CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */,
+				CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */,
 				CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */,
 				CE8E00961F8B77D700D0EF7E /* FullEvents.xcdatamodeld in Sources */,
+				CE8E00A91F8BF3AE00D0EF7E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +363,7 @@
 		};
 		CE8E00A01F8B77D700D0EF7E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FullEvents/Info.plist;
@@ -274,6 +376,7 @@
 		};
 		CE8E00A11F8B77D700D0EF7E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FullEvents/Info.plist;
@@ -303,6 +406,7 @@
 				CE8E00A11F8B77D700D0EF7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
