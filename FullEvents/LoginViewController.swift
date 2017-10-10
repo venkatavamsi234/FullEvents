@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
     var svc: SFSafariViewController?
     
     
-    let urlString = "https://fullcreative.fullauth.com/o/oauth2/auth?response_type=code&client_id=29354-4dfad15c1bcc7b057adb96651882db0f&redirect_uri=com.fullCreative.FullEvents:/oauth2callback&scope=awapis.users.read&access_type=offline&approval_prompt=force"
+    let urlString = "https://access.anywhereworks.com/o/oauth2/auth?response_type=code&client_id=29354-4dfad15c1bcc7b057adb96651882db0f&redirect_uri=com.fullCreative.FullEvents:/oauth2callback&scope=awapis.users.read&access_type=offline&approval_prompt=force"
     
     override func viewDidLoad() {
         super.viewDidLoad()

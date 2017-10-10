@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getAccessToken(str: String){
         
-        let url = try! "https://fullcreative.fullauth.com/o/oauth2/v1/token".asURL()
+        let url = try! "https://access.anywhereworks.com/o/oauth2/v1/token".asURL()
         
         let params: [String: Any] = ["code": str,
                                      "client_id": "29354-4dfad15c1bcc7b057adb96651882db0f",
