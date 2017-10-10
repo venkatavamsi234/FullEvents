@@ -16,8 +16,9 @@
 		CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */; };
 		CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */; };
 		CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */; };
-		CE8E00A91F8BF3AE00D0EF7E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */; };
 		CE8E00AB1F8C9A3300D0EF7E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00AA1F8C9A3300D0EF7E /* .gitignore */; };
+		CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */; };
+		CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +35,9 @@
 		CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CE8E00AA1F8C9A3300D0EF7E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +91,11 @@
 			isa = PBXGroup;
 			children = (
 				CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */,
+				CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */,
 				CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */,
 				CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */,
 				CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */,
-				CE8E00A81F8BF3AE00D0EF7E /* SettingsViewController.swift */,
+				CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */,
 				CE8E00911F8B77D700D0EF7E /* Main.storyboard */,
 				CE8E00971F8B77D700D0EF7E /* Assets.xcassets */,
 				CE8E00991F8B77D700D0EF7E /* LaunchScreen.storyboard */,
@@ -239,10 +242,11 @@
 			files = (
 				CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */,
 				CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */,
+				CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */,
 				CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */,
 				CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */,
+				CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */,
 				CE8E00961F8B77D700D0EF7E /* FullEvents.xcdatamodeld in Sources */,
-				CE8E00A91F8BF3AE00D0EF7E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

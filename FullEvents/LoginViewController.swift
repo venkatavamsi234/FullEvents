@@ -22,10 +22,16 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.accessTokenMethod), name: NSNotification.Name(rawValue: "Dismiss safari"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.accessTokenMethod(_: )), name: NSNotification.Name(rawValue: "Dismiss safari"), object: nil)
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationItem.hidesBackButton = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+    }
     
     
     
@@ -46,19 +52,45 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
         
     }
     
-    func accessTokenMethod() {
+    func accessTokenMethod(_ sender: NSNotification) {
         
-        svc?.dismiss(animated: false, completion: nil)
-        
-        if let  tbVc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+        if let loginfailed = sender.userInfo?["loginSuccess"] as? Bool {
             
-        {
-            
-            navigationController?.pushViewController(tbVc, animated: false)
+            if loginfailed == false {
+                
+
+                svc?.dismiss(animated: false, completion: nil)
+                
+                if let  lVc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+                    
+                {
+                    let alert = UIAlertController(title: "Login failed", message: "Please Try Again", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                       alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.destructive, handler: nil))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    navigationController?.pushViewController(lVc, animated: false)
+                }
+                
+                
+            } else {
+                
+                svc?.dismiss(animated: false, completion: nil)
+                
+                if let  tbVc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+                    
+                {
+                    
+                    navigationController?.pushViewController(tbVc, animated: false)
+                }
+                
+            }
         }
         
         
     }
     
-    
 }
+
+

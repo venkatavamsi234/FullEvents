@@ -86,34 +86,57 @@
             </objects>
             <point key="canvasLocation" x="3759" y="-203"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="1Ov-a4-j0L">
             <objects>
-                <tableViewController id="tYg-df-kGP" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wMu-CU-dts">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" id="tYg-df-kGP" customClass="SettingsTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wMu-CU-dts">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VP4-rl-xMB">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VP4-rl-xMB" id="lhn-wu-i6h">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <sections>
+                            <tableViewSection headerTitle="                     " id="NkL-3Q-0av">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="VP4-rl-xMB">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VP4-rl-xMB" id="lhn-wu-i6h">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bca-OR-B05">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="Sign Out">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="signOutAction:" destination="tYg-df-kGP" eventType="touchUpInside" id="jv7-jK-xXG"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Bca-OR-B05" secondAttribute="trailing" id="Pqe-Zq-Q2j"/>
+                                                <constraint firstItem="Bca-OR-B05" firstAttribute="top" secondItem="lhn-wu-i6h" secondAttribute="top" id="RD0-1Y-b7G"/>
+                                                <constraint firstAttribute="bottom" secondItem="Bca-OR-B05" secondAttribute="bottom" id="mlT-Hk-YO6"/>
+                                                <constraint firstItem="Bca-OR-B05" firstAttribute="leading" secondItem="lhn-wu-i6h" secondAttribute="leading" id="mnL-k3-jN9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="tYg-df-kGP" id="VT9-dk-rWi"/>
                             <outlet property="delegate" destination="tYg-df-kGP" id="QA1-TO-zkP"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="dbo-Mw-oeK"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="icons8-Settings-20" id="dbo-Mw-oeK"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHq-J2-Vld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="505"/>
+            <point key="canvasLocation" x="3757.5999999999999" y="504.19790104947532"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="k3I-rM-bbv">
@@ -133,10 +156,10 @@
             </objects>
             <point key="canvasLocation" x="2639" y="38"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="Inm-Dz-V2h">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="srt-SP-wPT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="srt-SP-wPT" customClass="NavigationViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zNm-fx-ewB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -156,5 +179,6 @@
         <image name="Icon-App-60x60" width="60" height="60"/>
         <image name="aw" width="36" height="21"/>
         <image name="icons8-Dashboard-20" width="20" height="20"/>
+        <image name="icons8-Settings-20" width="20" height="20"/>
     </resources>
 </document>
