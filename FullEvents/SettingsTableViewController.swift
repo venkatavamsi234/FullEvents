@@ -36,14 +36,25 @@ class SettingsTableViewController: UITableViewController {
     
     func userLogOut(action: UIAlertAction)  {
         
-        guard  let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+        guard  let accessToken = AccessTokenHelper.getAccessToken() else {
+            
             return
+            
         }
         
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        
-        guard let apiToContact = try?"https://fullcreative.fullauth.com/o/oauth2/revoke?token=\(accessToken)".asURL() else {
+        guard  let refreshAccessToken = AccessTokenHelper.getRefreshAccessToken() else {
+            
             return
+            
+        }
+        
+        AccessTokenHelper.removeRefreshAccessToken(refreshAccessToken: refreshAccessToken)
+        
+        
+        guard let apiToContact = try?"\(Constants.baseUrlString)/revoke?token=\(accessToken)".asURL() else {
+            
+            return
+            
         }
         
         Alamofire.request(apiToContact, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON() { response in
@@ -51,13 +62,14 @@ class SettingsTableViewController: UITableViewController {
             switch response.result {
                 
             case .success:
+                
                 if let value = response.result.value {
-                    
                     let json = JSON(value)
                     print(json)
                     print("The Token has been successfully revoked")
                     
                 }
+                
             case .failure(let error):
                 print(error)
                 
@@ -65,21 +77,7 @@ class SettingsTableViewController: UITableViewController {
             
         }
         
-        let alert = UIAlertController(title: "", message: "Sign out successful", preferredStyle: UIAlertControllerStyle.alert)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-            alert.dismiss(animated: true, completion: nil)
-            self.landToLoginPage()
-        })
-        
-        
-        
-    }
-    
-    func landToLoginPage() {
+        AccessTokenHelper.removeAccessToken(accessToken: accessToken)
         
         guard  let  lvc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
             

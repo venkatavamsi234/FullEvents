@@ -65,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.2" y="38.23088455772114"/>
+            <point key="canvasLocation" x="1636" y="728"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="U1c-pg-epe">
@@ -90,16 +90,15 @@
         <scene sceneID="1Ov-a4-j0L">
             <objects>
                 <tableViewController storyboardIdentifier="SettingsTableViewController" id="tYg-df-kGP" customClass="SettingsTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wMu-CU-dts">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wMu-CU-dts">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
-                            <tableViewSection headerTitle="                     " id="NkL-3Q-0av">
+                            <tableViewSection id="NkL-3Q-0av">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="VP4-rl-xMB">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VP4-rl-xMB" id="lhn-wu-i6h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -107,7 +106,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bca-OR-B05">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <state key="normal" title="Sign Out">
                                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -115,6 +114,11 @@
                                                         <action selector="signOutAction:" destination="tYg-df-kGP" eventType="touchUpInside" id="jv7-jK-xXG"/>
                                                     </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpP-Gf-kMI">
+                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Bca-OR-B05" secondAttribute="trailing" id="Pqe-Zq-Q2j"/>
@@ -142,6 +146,7 @@
         <scene sceneID="k3I-rM-bbv">
             <objects>
                 <tabBarController storyboardIdentifier="TabBarViewController" id="epA-lD-yce" customClass="TabBarViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ul7-rD-f9e"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="YC1-iE-tgb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -154,7 +159,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m81-Wm-vyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2639" y="38"/>
+            <point key="canvasLocation" x="2031" y="37"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="Inm-Dz-V2h">
@@ -167,12 +172,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tVc-vZ-S3J"/>
+                        <segue destination="epA-lD-yce" kind="relationship" relationship="rootViewController" id="oo9-Uc-z3q"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69j-Gs-gAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="38.23088455772114"/>
+            <point key="canvasLocation" x="1066" y="38"/>
         </scene>
     </scenes>
     <resources>

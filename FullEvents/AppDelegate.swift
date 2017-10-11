@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    let notificationKey =  Notification.Name(rawValue: "Dismiss safari")
+    let notificationKey =  Notification.Name(rawValue: "Login Response")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -59,12 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getAccessToken(str: String){
         
-        let url = try! "https://access.anywhereworks.com/o/oauth2/v1/token".asURL()
+        
+        let url = try! "\(Constants.baseUrlString)/v1/token".asURL()
         
         let params: [String: Any] = ["code": str,
-                                     "client_id": "29354-4dfad15c1bcc7b057adb96651882db0f",
-                                     "client_secret" : "uZkwpajg8ZjQ6wYAJcJ-1PErhQONEvYDbVagHLB6",
-                                     "redirect_uri": "com.fullCreative.FullEvents:/oauth2callback",
+                                     "client_id": Constants.clientId,
+                                     "client_secret": Constants.clientSecret,
+                                     "redirect_uri": Constants.redirectUri,
                                      "grant_type": "authorization_code"
         ]
         
@@ -87,9 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                     
-                    UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                    UserDefaults.standard.set(refreshAccessToken, forKey: "refreshAccessToken")
-                    
+                    AccessTokenHelper.setAccessToken(accessToken: accessToken )
+                    AccessTokenHelper.setRefreshAccessToken(refreshToken: refreshAccessToken)
+                
                     NotificationCenter.default.post(name: self.notificationKey, object: self, userInfo: ["loginSuccess": true] )
                     
                 }
