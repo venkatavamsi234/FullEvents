@@ -51,13 +51,13 @@ class SettingsTableViewController: UITableViewController {
         AccessTokenHelper.removeRefreshAccessToken(refreshAccessToken: refreshAccessToken)
         
         
-        guard let apiToContact = try?"\(Constants.baseUrlString)/revoke?token=\(accessToken)".asURL() else {
+        guard let revokeAccessTokenUrl = try?"\(Constants.baseUrlString)/revoke?token=\(accessToken)".asURL() else {
             
             return
             
         }
         
-        Alamofire.request(apiToContact, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON() { response in
+        Alamofire.request(revokeAccessTokenUrl, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON() { response in
             
             switch response.result {
                 
