@@ -180,7 +180,8 @@
 				TargetAttributes = {
 					CE8E00891F8B77D700D0EF7E = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 2UBVJ7AR3B;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -414,10 +415,15 @@
 			baseConfigurationReference = 5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sambasiva Gupta Korada (222C97W6MJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sambasiva Gupta Korada (222C97W6MJ)";
+				DEVELOPMENT_TEAM = 2UBVJ7AR3B;
 				INFOPLIST_FILE = FullEvents/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fullCreative.FullEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0046c2be-43d6-46b2-8dc2-cf11bed037ac";
+				PROVISIONING_PROFILE_SPECIFIER = "FullEvents Dev Provisioning Profile";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -427,10 +433,15 @@
 			baseConfigurationReference = 4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2UBVJ7AR3B;
 				INFOPLIST_FILE = FullEvents/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fullCreative.FullEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0fcc62e0-b6d3-4b13-8747-4c3cfe5e30b0";
+				PROVISIONING_PROFILE_SPECIFIER = "FullEvents Dist Provisioning Profile";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
