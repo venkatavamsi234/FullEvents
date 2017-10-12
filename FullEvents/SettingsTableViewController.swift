@@ -12,26 +12,56 @@ import SwiftyJSON
 
 class SettingsTableViewController: UITableViewController {
     
+    @IBOutlet weak var userProfile: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.topItem?.title = "Settings"
         
     }
     
-    @IBAction func signOutAction(_ sender: Any) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let alert = UIAlertController(title: "SignOut", message: "Would you like to SignOut", preferredStyle: UIAlertControllerStyle.alert)
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        alert.addAction(UIAlertAction(title: "SignOut", style: UIAlertActionStyle.destructive, handler: userLogOut))
+        switch (indexPath.section, indexPath.row) {
+            
+        case (0, 0):
+            
+            // If indexpath is equal to section 0 and row 0 it will push profile view controller into the stack
+            
+            guard let profileVC = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController else {
+                
+                return
+                
+            }
+            
+            navigationController?.pushViewController(profileVC, animated: true)
+            
+        case (1, 0):
+            
+            // If indexpath is equal to section 1 and row 0 it will perform the signout action
+            
+            let alert = UIAlertController(title: "SignOut", message: "Would you like to SignOut", preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction(title: "SignOut", style: UIAlertActionStyle.destructive, handler: userLogOut))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        default:
+            
+            break
+            
+        }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     func userLogOut(action: UIAlertAction)  {
@@ -80,11 +110,8 @@ class SettingsTableViewController: UITableViewController {
         AccessTokenHelper.removeAccessToken(accessToken: accessToken)
         
         guard  let  lvc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
-            
             return
-            
         }
-        
         navigationController?.setViewControllers([lvc], animated: true)
         
     }

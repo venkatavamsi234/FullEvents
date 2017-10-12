@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
     
     var svc: SFSafariViewController?
 
-    let urlString = "\(Constants.baseUrlString)/auth?response_type=code&client_id=\(Constants.clientId)&redirect_uri=\(Constants.redirectUri)&scope=awapis.users.read&access_type=offline&approval_prompt=force"
+    let urlString = "\(Constants.baseUrlString)/auth?response_type=code&client_id=\(Constants.clientId)&redirect_uri=\(Constants.redirectUri)&scope=awapis.users.read%20awapis.account.read%20awapis.identity&access_type=offline&approval_prompt=force"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
         
         navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        print(urlString)
-        
+                
     }
     
     

@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 
 class DashboardViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-          }
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -22,17 +24,19 @@ class DashboardViewController: UIViewController {
         
         self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonAction(sender:)))
         
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
-
+        
     }
+    
     func addButtonAction(sender button: UIBarButtonItem) {
         
         print("Hello")
+        
     }
-
-   
+    
 }
