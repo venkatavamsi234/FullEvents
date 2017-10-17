@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        AccountHelperFile.userInfo() { result in
+        AccountHelper.userInfo() { result in
             
             let userData = result["data"]
             

@@ -81,12 +81,14 @@ class SettingsTableViewController: UITableViewController {
         AccessTokenHelper.removeRefreshAccessToken(refreshAccessToken: refreshAccessToken)
         
         
-        guard let revokeAccessTokenUrl = try?"\(Constants.baseUrlString)/revoke?token=\(accessToken)".asURL() else {
+        guard let revokeAccessTokenUrl = try? "\(Constants.baseUrlString)/revoke?token=\(accessToken)".asURL() else {
             
             return
             
         }
         
+         UserDefaults.standard.removeObject(forKey: "cursor")
+
         Alamofire.request(revokeAccessTokenUrl, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON() { response in
             
             switch response.result {

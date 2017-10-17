@@ -13,15 +13,17 @@ import SwiftyJSON
 
 class DashboardViewController: UIViewController {
     
+    @IBOutlet weak var userEmail: UILabel!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.topItem?.title = "Dashboard"
-        
         self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonAction(sender:)))
         
         
