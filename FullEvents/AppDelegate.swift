@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let notificationKey =  Notification.Name(rawValue: "Login Response")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-            
+        
         return true
     }
     
@@ -39,9 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         
-        if let cursor = UserDefaults.standard.string(forKey: "cursorForContacts") {
+        if let cursorForContacts = UserDefaults.standard.string(forKey: "cursorForContacts"), !cursorForContacts.isEmpty  {
             DispatchQueue.global(qos: .background).async {
-            AccountHelper.accountAPIContactsCall(cursorForContacts: cursor)
+                AccountHelper.accountAPIContacts(cursorForContacts: cursorForContacts)
+                if let cursorForStreams = UserDefaults.standard.string(forKey: "cursorForStreams") {
+                    AwStreamHelpers.getStreams(cursor: cursorForStreams)
+                }
             }
         }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -95,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     AccessTokenHelper.setAccessToken(accessToken: accessToken )
                     AccessTokenHelper.setRefreshAccessToken(refreshToken: refreshAccessToken)
-                
+                    
                     NotificationCenter.default.post(name: self.notificationKey, object: self, userInfo: ["loginSuccess": true] )
                     
                 }
@@ -109,5 +112,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-  }
+}
 

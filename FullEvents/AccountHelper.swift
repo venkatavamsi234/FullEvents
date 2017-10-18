@@ -89,7 +89,7 @@
     }
     
     
-    class func accountAPIContactsCall(limit: Int = 15, cursorForContacts: String? = nil) {
+    class func accountAPIContacts(limit: Int = 15, cursorForContacts: String? = nil) {
         
         guard let accountId = UserDefaults.standard.string(forKey: "accountId") else {
             return
@@ -132,7 +132,7 @@
                     
                     if let cursor = user["cursor"].string, !cursor.isEmpty {
                         UserDefaults.standard.set(cursor, forKey: "cursorForContacts")
-                        accountAPIContactsCall(limit: limit, cursorForContacts: cursor)
+                        accountAPIContacts(limit: limit, cursorForContacts: cursor)
                     } else {
                         return
                     }

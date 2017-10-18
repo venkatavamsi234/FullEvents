@@ -1,6 +1,6 @@
 //
 //  Contact+CoreDataClass.swift
-//  
+//
 //
 //  Created by user on 17/10/17.
 //
@@ -38,6 +38,6 @@ public class Contact: NSManagedObject {
         }
         
     }
-
-
+    
+    
 }

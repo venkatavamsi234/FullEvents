@@ -82,8 +82,8 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
             print("Login is successful: \(accountId)")
             
             DispatchQueue.global(qos: .background).async {
-                AccountHelper.accountAPIContactsCall()
-                AwStreamHelpers.getAnywhereWorksStreams()
+                AccountHelper.accountAPIContacts()
+                AwStreamHelpers.getStreams()
             }
             
             if let  tbVc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController {
