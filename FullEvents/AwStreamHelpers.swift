@@ -54,11 +54,15 @@ class AwStreamHelpers {
                     let json = JSON(value)
                     let data = json["data"]
                     let streams = data["streams"]
-                    UserStreams.savingStreams(streamsJson: streams)
-                    if let cursor = data["cursor"].string, !cursor.isEmpty {
-                        getStreams(cursor: cursor)
-                        UserDefaults.standard.set(cursor, forKey: "cursorForStreams ")
+                    StreamService.savingStreams(streamsJson: streams)
+                    print(streams)
+                    
+                    guard let cursor = data["cursor"].string, !cursor.isEmpty else  {
+                        return
                     }
+                    
+                    getStreams(cursor: cursor)
+                    UserDefaults.standard.set(cursor, forKey: "cursorForStreams ")
                 }
                 
             case .failure(let error):

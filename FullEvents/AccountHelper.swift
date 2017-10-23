@@ -11,6 +11,7 @@
    import SwiftyJSON
    import FullAuthIOSClient
    import CoreData
+   import AlecrimCoreData
    
    class AccountHelper {
     
@@ -88,7 +89,6 @@
         }
     }
     
-    
     class func accountAPIContacts(limit: Int = 15, cursorForContacts: String? = nil) {
         
         guard let accountId = UserDefaults.standard.string(forKey: "accountId") else {
@@ -125,17 +125,18 @@
                 if let value = response.result.value {
                     let json = JSON(value)
                     let user = json["data"]
-                    let contactsJson = user["users"]
+                    let usersJson = user["users"]
                     
-                    
-                    Contact.savingContacts(contactsJson: contactsJson)
-                    
-                    if let cursor = user["cursor"].string, !cursor.isEmpty {
-                        UserDefaults.standard.set(cursor, forKey: "cursorForContacts")
-                        accountAPIContacts(limit: limit, cursorForContacts: cursor)
-                    } else {
-                        return
+                    UserService.savingUserData(usersJson: usersJson)
+            
+                    guard let cursor = user["cursor"].string, !cursor.isEmpty  else {
+                    return
                     }
+                    
+                    UserDefaults.standard.set(cursor, forKey: "cursorForContacts")
+                    accountAPIContacts(limit: limit, cursorForContacts: cursor)
+                    
+              
                     
                 }
                 
@@ -144,6 +145,7 @@
             }
             
         }
+        
         
     }
     

@@ -9,36 +9,26 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AlecrimCoreData
 
 
 class DashboardViewController: UIViewController {
     
-    @IBOutlet weak var userEmail: UILabel!
-        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.navigationController?.navigationBar.topItem?.title = "Dashboard"
-        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonAction(sender:)))
-        
+      
+        navigationController?.navigationBar.topItem?.title = "Dashboard"
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-        
+    @IBAction func addingEvents(_ sender: Any) {
     }
     
-    func addButtonAction(sender button: UIBarButtonItem) {
-        
-        print("Hello")
-        
-    }
+    
     
 }

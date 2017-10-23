@@ -1,5 +1,5 @@
 //
-//  UserStreams+CoreDataClass.swift
+//  User+CoreDataClass.swift
 //  FullEvents
 //
 //  Created by user on 19/10/17.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(UserStreams)
-public class UserStreams: NSManagedObject {
+@objc(User)
+public class User: NSManagedObject {
 
 }

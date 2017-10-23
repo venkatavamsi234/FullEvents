@@ -9,7 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import CoreData
+import AlecrimCoreData
+
+let container = PersistentContainer(name: "FullEvents")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,11 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let cursorForContacts = UserDefaults.standard.string(forKey: "cursorForContacts"), !cursorForContacts.isEmpty  {
             DispatchQueue.global(qos: .background).async {
                 AccountHelper.accountAPIContacts(cursorForContacts: cursorForContacts)
-                if let cursorForStreams = UserDefaults.standard.string(forKey: "cursorForStreams") {
-                    AwStreamHelpers.getStreams(cursor: cursorForStreams)
-                }
             }
         }
+        
+        if let cursorForStreams = UserDefaults.standard.string(forKey: "cursorForStreams"), !cursorForStreams.isEmpty {
+            DispatchQueue.global(qos: .background).async {
+                AwStreamHelpers.getStreams(cursor: cursorForStreams)
+            }
+        }
+        
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
     
