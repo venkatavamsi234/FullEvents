@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AlecrimCoreData
+import CoreData
 
 class SettingsTableViewController: UITableViewController {
     
@@ -19,12 +21,9 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        self.navigationController?.navigationBar.topItem?.title = "Settings"
-        
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "Settings"
     }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -64,6 +63,19 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
+    func clearCoreData(entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try container.viewContext.execute(batchDeleteRequest)
+            print(container.viewContext.users.count()
+            )
+        } catch {
+            print("error, coredata is not cleared")
+        }
+    }
+    
     func userLogOut(action: UIAlertAction)  {
         
         guard  let accessToken = AccessTokenHelper.getAccessToken() else {
@@ -87,8 +99,11 @@ class SettingsTableViewController: UITableViewController {
             
         }
         
-         UserDefaults.standard.removeObject(forKey: "cursor")
-
+        UserDefaults.standard.removeObject(forKey: "cursorForContacts")
+        UserDefaults.standard.removeObject(forKey: "cursorForStreams")
+        
+        
+        
         Alamofire.request(revokeAccessTokenUrl, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON() { response in
             
             switch response.result {
@@ -111,10 +126,12 @@ class SettingsTableViewController: UITableViewController {
         
         AccessTokenHelper.removeAccessToken(accessToken: accessToken)
         
+        clearCoreData(entityName: "User")
+        clearCoreData(entityName: "UserStreams")
         guard  let  lvc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
             return
         }
-        navigationController?.setViewControllers([lvc], animated: true)
+        tabBarController?.navigationController?.setViewControllers([lvc], animated: true)
         
     }
     

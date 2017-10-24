@@ -126,16 +126,13 @@
                     let usersJson = user["users"]
                     
                     UserService.savingUserData(usersJson: usersJson)
-            
+                    
                     guard let cursor = user["cursor"].string, !cursor.isEmpty  else {
-                    return
+                        return
                     }
                     
                     UserDefaults.standard.set(cursor, forKey: "cursorForContacts")
                     accountAPIContacts(limit: limit, cursorForContacts: cursor)
-                    
-              
-                    
                 }
                 
             case .failure(let error):
@@ -143,8 +140,5 @@
             }
             
         }
-        
-        
     }
-    
    }

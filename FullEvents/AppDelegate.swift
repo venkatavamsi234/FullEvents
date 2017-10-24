@@ -40,7 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
+        guard let accessToken = AccessTokenHelper.getAccessToken() else {
+            return
+        }
+        if !accessToken.isEmpty {
         if let cursorForContacts = UserDefaults.standard.string(forKey: "cursorForContacts"), !cursorForContacts.isEmpty  {
             DispatchQueue.global(qos: .background).async {
                 AccountHelper.accountAPIContacts(cursorForContacts: cursorForContacts)
@@ -51,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.global(qos: .background).async {
                 AwStreamHelpers.getStreams(cursor: cursorForStreams)
             }
+        }
         }
         
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.

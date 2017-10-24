@@ -62,7 +62,7 @@ class AwStreamHelpers {
                     }
                     
                     getStreams(cursor: cursor)
-                    UserDefaults.standard.set(cursor, forKey: "cursorForStreams ")
+                    UserDefaults.standard.set(cursor, forKey: "cursorForStreams")
                 }
                 
             case .failure(let error):
