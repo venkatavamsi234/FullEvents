@@ -8,46 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		265DF5170992BC6CE3B1EC58 /* Pods_FullEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */; };
-		CE8909B31F8DF12C00059F41 /* AwChatAndStreamHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B21F8DF12C00059F41 /* AwChatAndStreamHelpers.swift */; };
-		CE8909B51F8E4A4200059F41 /* AccountHelperFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B41F8E4A4200059F41 /* AccountHelperFile.swift */; };
+		CE463EA61F9494230064BFA5 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE463EA51F9494230064BFA5 /* DashboardViewController.swift */; };
+		CE5ED6841F94B2CB0003C94E /* FullEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE5ED6821F94B2CB0003C94E /* FullEvents.xcdatamodeld */; };
+		CE85CF5F1F98E447007B0EC2 /* UserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */; };
+		CE85CF6B1F98F754007B0EC2 /* StreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF6A1F98F754007B0EC2 /* StreamService.swift */; };
+		CE85CF701F9901A0007B0EC2 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF6C1F9901A0007B0EC2 /* User+CoreDataClass.swift */; };
+		CE85CF711F9901A0007B0EC2 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF6D1F9901A0007B0EC2 /* User+CoreDataProperties.swift */; };
+		CE85CF721F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF6E1F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift */; };
+		CE85CF731F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF6F1F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift */; };
+		CE85CF751F9901E5007B0EC2 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF741F9901E5007B0EC2 /* UserService.swift */; };
+		CE8909B31F8DF12C00059F41 /* AwStreamHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B21F8DF12C00059F41 /* AwStreamHelpers.swift */; };
+		CE8909B51F8E4A4200059F41 /* AccountHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B41F8E4A4200059F41 /* AccountHelper.swift */; };
 		CE8909B71F8E4D9200059F41 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */; };
 		CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */; };
 		CE8E00931F8B77D700D0EF7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00911F8B77D700D0EF7E /* Main.storyboard */; };
-		CE8E00961F8B77D700D0EF7E /* FullEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00941F8B77D700D0EF7E /* FullEvents.xcdatamodeld */; };
 		CE8E00981F8B77D700D0EF7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00971F8B77D700D0EF7E /* Assets.xcassets */; };
 		CE8E009B1F8B77D700D0EF7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00991F8B77D700D0EF7E /* LaunchScreen.storyboard */; };
 		CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */; };
 		CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */; };
-		CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */; };
 		CE8E00AB1F8C9A3300D0EF7E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00AA1F8C9A3300D0EF7E /* .gitignore */; };
 		CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */; };
 		CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */; };
 		CE8E00B31F8CF25400D0EF7E /* AccessTokenHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00B21F8CF25400D0EF7E /* AccessTokenHelper.swift */; };
 		CE8E00B51F8CFB0C00D0EF7E /* ConstantsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00B41F8CFB0C00D0EF7E /* ConstantsHelper.swift */; };
+		CECCABA11F9A571B00D28109 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCABA01F9A571B00D28109 /* PeersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FullEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.release.xcconfig"; sourceTree = "<group>"; };
 		5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.debug.xcconfig"; sourceTree = "<group>"; };
-		CE8909B21F8DF12C00059F41 /* AwChatAndStreamHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwChatAndStreamHelpers.swift; sourceTree = "<group>"; };
-		CE8909B41F8E4A4200059F41 /* AccountHelperFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountHelperFile.swift; sourceTree = "<group>"; };
+		CE463EA51F9494230064BFA5 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		CE5ED6831F94B2CB0003C94E /* FullEvents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullEvents.xcdatamodel; sourceTree = "<group>"; };
+		CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserExtension.swift; sourceTree = "<group>"; };
+		CE85CF6A1F98F754007B0EC2 /* StreamService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamService.swift; sourceTree = "<group>"; };
+		CE85CF6C1F9901A0007B0EC2 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE85CF6D1F9901A0007B0EC2 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE85CF6E1F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserStreams+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE85CF6F1F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserStreams+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE85CF741F9901E5007B0EC2 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		CE8909B21F8DF12C00059F41 /* AwStreamHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwStreamHelpers.swift; sourceTree = "<group>"; };
+		CE8909B41F8E4A4200059F41 /* AccountHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountHelper.swift; sourceTree = "<group>"; };
 		CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE8E008A1F8B77D700D0EF7E /* FullEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8E00921F8B77D700D0EF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CE8E00951F8B77D700D0EF7E /* FullEvents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullEvents.xcdatamodel; sourceTree = "<group>"; };
 		CE8E00971F8B77D700D0EF7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE8E009A1F8B77D700D0EF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8E009C1F8B77D700D0EF7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		CE8E00AA1F8C9A3300D0EF7E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		CE8E00B21F8CF25400D0EF7E /* AccessTokenHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessTokenHelper.swift; sourceTree = "<group>"; };
 		CE8E00B41F8CFB0C00D0EF7E /* ConstantsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsHelper.swift; sourceTree = "<group>"; };
+		CECCABA01F9A571B00D28109 /* PeersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +95,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE463EAB1F9495380064BFA5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CE85CF6C1F9901A0007B0EC2 /* User+CoreDataClass.swift */,
+				CE85CF6D1F9901A0007B0EC2 /* User+CoreDataProperties.swift */,
+				CE85CF6E1F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift */,
+				CE85CF6F1F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift */,
+				CE85CF741F9901E5007B0EC2 /* UserService.swift */,
+				CE85CF6A1F98F754007B0EC2 /* StreamService.swift */,
+				CE5ED6821F94B2CB0003C94E /* FullEvents.xcdatamodeld */,
+				CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		CE8909AF1F8DECD700059F41 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				CE8E00B21F8CF25400D0EF7E /* AccessTokenHelper.swift */,
 				CE8E00B41F8CFB0C00D0EF7E /* ConstantsHelper.swift */,
-				CE8909B21F8DF12C00059F41 /* AwChatAndStreamHelpers.swift */,
-				CE8909B41F8E4A4200059F41 /* AccountHelperFile.swift */,
+				CE8909B21F8DF12C00059F41 /* AwStreamHelpers.swift */,
+				CE8909B41F8E4A4200059F41 /* AccountHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -105,8 +136,9 @@
 			children = (
 				CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */,
 				CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */,
-				CE8E00A61F8BDC7400D0EF7E /* DashboardViewController.swift */,
+				CE463EA51F9494230064BFA5 /* DashboardViewController.swift */,
 				CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */,
+				CECCABA01F9A571B00D28109 /* PeersViewController.swift */,
 				CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
@@ -133,13 +165,13 @@
 		CE8E008C1F8B77D700D0EF7E /* FullEvents */ = {
 			isa = PBXGroup;
 			children = (
+				CE463EAB1F9495380064BFA5 /* CoreData */,
 				CE8909B01F8DED0500059F41 /* MainFiles */,
 				CE8909B11F8DED4F00059F41 /* ViewControllers */,
 				CE8909AF1F8DECD700059F41 /* Helpers */,
 				CE8E00971F8B77D700D0EF7E /* Assets.xcassets */,
 				CE8E00991F8B77D700D0EF7E /* LaunchScreen.storyboard */,
 				CE8E009C1F8B77D700D0EF7E /* Info.plist */,
-				CE8E00941F8B77D700D0EF7E /* FullEvents.xcdatamodeld */,
 				CE8E00AA1F8C9A3300D0EF7E /* .gitignore */,
 			);
 			path = FullEvents;
@@ -180,8 +212,12 @@
 				TargetAttributes = {
 					CE8E00891F8B77D700D0EF7E = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 2UBVJ7AR3B;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -226,12 +262,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlecrimCoreData/AlecrimCoreData.framework",
 				"${BUILT_PRODUCTS_DIR}/FullAuthIOSClient/FullAuthIOSClient.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlecrimCoreData.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FullAuthIOSClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -281,17 +319,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8E00B51F8CFB0C00D0EF7E /* ConstantsHelper.swift in Sources */,
-				CE8909B31F8DF12C00059F41 /* AwChatAndStreamHelpers.swift in Sources */,
-				CE8909B51F8E4A4200059F41 /* AccountHelperFile.swift in Sources */,
+				CE8909B31F8DF12C00059F41 /* AwStreamHelpers.swift in Sources */,
+				CE8909B51F8E4A4200059F41 /* AccountHelper.swift in Sources */,
 				CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */,
 				CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */,
+				CE85CF751F9901E5007B0EC2 /* UserService.swift in Sources */,
 				CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */,
 				CE8909B71F8E4D9200059F41 /* ProfileViewController.swift in Sources */,
-				CE8E00A71F8BDC7400D0EF7E /* DashboardViewController.swift in Sources */,
+				CE85CF721F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift in Sources */,
+				CE463EA61F9494230064BFA5 /* DashboardViewController.swift in Sources */,
+				CECCABA11F9A571B00D28109 /* PeersViewController.swift in Sources */,
+				CE85CF711F9901A0007B0EC2 /* User+CoreDataProperties.swift in Sources */,
+				CE85CF5F1F98E447007B0EC2 /* UserExtension.swift in Sources */,
 				CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */,
+				CE85CF731F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift in Sources */,
 				CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */,
 				CE8E00B31F8CF25400D0EF7E /* AccessTokenHelper.swift in Sources */,
-				CE8E00961F8B77D700D0EF7E /* FullEvents.xcdatamodeld in Sources */,
+				CE85CF701F9901A0007B0EC2 /* User+CoreDataClass.swift in Sources */,
+				CE85CF6B1F98F754007B0EC2 /* StreamService.swift in Sources */,
+				CE5ED6841F94B2CB0003C94E /* FullEvents.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,14 +462,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sambasiva Gupta Korada (222C97W6MJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sambasiva Gupta Korada (222C97W6MJ)";
-				DEVELOPMENT_TEAM = 2UBVJ7AR3B;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FullEvents/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fullCreative.FullEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0046c2be-43d6-46b2-8dc2-cf11bed037ac";
-				PROVISIONING_PROFILE_SPECIFIER = "FullEvents Dev Provisioning Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -434,14 +480,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 2UBVJ7AR3B;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FullEvents/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fullCreative.FullEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fcc62e0-b6d3-4b13-8747-4c3cfe5e30b0";
-				PROVISIONING_PROFILE_SPECIFIER = "FullEvents Dist Provisioning Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -470,12 +516,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CE8E00941F8B77D700D0EF7E /* FullEvents.xcdatamodeld */ = {
+		CE5ED6821F94B2CB0003C94E /* FullEvents.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CE8E00951F8B77D700D0EF7E /* FullEvents.xcdatamodel */,
+				CE5ED6831F94B2CB0003C94E /* FullEvents.xcdatamodel */,
 			);
-			currentVersion = CE8E00951F8B77D700D0EF7E /* FullEvents.xcdatamodel */;
+			currentVersion = CE5ED6831F94B2CB0003C94E /* FullEvents.xcdatamodel */;
 			path = FullEvents.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

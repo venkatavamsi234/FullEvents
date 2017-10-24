@@ -44,9 +44,9 @@ class AccessTokenHelper {
     class  func removeRefreshAccessToken(refreshAccessToken: String) {
         
         UserDefaults.standard.removeObject(forKey: "refreshAccessToken")
-        
-    }
 
+    }
+    
     
     class func refreshAccessToken() {
         
@@ -69,7 +69,7 @@ class AccessTokenHelper {
                                      "client_secret": Constants.clientSecret,
                                      "grant_type": "refresh_token"
         ]
-
+        
         Alamofire.request(url, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseData { (
             response) in
             
@@ -92,7 +92,7 @@ class AccessTokenHelper {
             }
             
         }
-       
+        
     }
     
     

@@ -1,10 +1,12 @@
 PODS:
   - Alamofire (4.5.1)
+  - AlecrimCoreData (5.0)
   - FullAuthIOSClient (0.6.0):
     - Alamofire (~> 4.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - AlecrimCoreData
   - FullAuthIOSClient (from `https://github.com/FullCreative/fullauth-api-ios-client.git`, branch `Swift3`)
   - SwiftyJSON
 
@@ -20,9 +22,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlecrimCoreData: f1251de3630f4d4d3a212e405298084c229cef29
   FullAuthIOSClient: c38e2469128068c5d5bf8eceb7cc83e8fbd915a1
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 5800a0fb400e180b70c89d3c3dfc3a5bf0450cff
+PODFILE CHECKSUM: 6cfaf165f7f2290f784cedbd3eca97b0d8836b5d
 
 COCOAPODS: 1.3.1

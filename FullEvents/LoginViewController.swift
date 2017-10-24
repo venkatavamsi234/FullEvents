@@ -15,8 +15,8 @@ import SafariServices
 class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIWebViewDelegate{
     
     var svc: SFSafariViewController?
-
-    let urlString = "\(Constants.baseUrlString)/auth?response_type=code&client_id=\(Constants.clientId)&redirect_uri=\(Constants.redirectUri)&scope=awapis.users.read%20awapis.account.read%20awapis.identity&access_type=offline&approval_prompt=force"
+    
+    let urlString = "\(Constants.baseUrlString)/auth?response_type=code&client_id=\(Constants.clientId)&redirect_uri=\(Constants.redirectUri)&scope=awapis.users.read%20awapis.account.read%20awapis.identity%20awapis.streams.read&access_type=offline&approval_prompt=force"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
         
         navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(true, animated: false)
-                
+        
     }
     
     
@@ -51,44 +51,48 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
         
     }
     
-    func loginHandler(_ sender: NSNotification) {
+    
+    func loginFailedAlert() {
         
-        if let loginfailed = sender.userInfo?["loginSuccess"] as? Bool {
-            
-            if loginfailed == false {
-                
-                svc?.dismiss(animated: false, completion: nil)
-                
-                if let  lVc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
-                    
-                {
-                    let alert = UIAlertController(title: "Login failed", message: "Please Try Again", preferredStyle: UIAlertControllerStyle.alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.destructive, handler: nil))
-                    
-                    self.present(alert, animated: true, completion: nil)
-                    
-                    navigationController?.pushViewController(lVc, animated: false)
-                }
-                
-                
-            } else {
-                
-                svc?.dismiss(animated: false, completion: nil)
-                
-                if let  tbVc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
-                    
-                {
-                    
-                    navigationController?.pushViewController(tbVc, animated: false)
-                }
-                
-            }
-        }
+        let alert = UIAlertController(title: "Login failed", message: "Please Try Again", preferredStyle: UIAlertControllerStyle.alert)
         
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.destructive, handler: nil))
         
+        self.present(alert, animated: true, completion: nil)
     }
     
+    func loginHandler(_ sender: NSNotification) {
+        
+        svc?.dismiss(animated: false, completion: nil)
+        
+        guard let loginSuccess = sender.userInfo?["loginSuccess"] as? Bool, loginSuccess  else {
+            loginFailedAlert()
+            return
+        }
+        
+        print("Successfullt oAuthorised")
+        
+        AccountHelper.accountAPICall() {
+            
+            guard let accountId = UserDefaults.standard.string(forKey: "accountId"), !accountId.isEmpty else {
+                self.loginFailedAlert()
+                return
+            }
+            
+            print("Login is successful: \(accountId)")
+            
+            DispatchQueue.global(qos: .background).async {
+                AccountHelper.accountAPIContacts()
+                AwStreamHelpers.getStreams()
+            }
+            
+            if let  tbVc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController {
+                self.navigationController?.pushViewController(tbVc, animated: true)
+            }
+            
+        }
+    }
 }
+
 
 
