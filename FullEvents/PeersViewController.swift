@@ -28,8 +28,9 @@ class PeerTableViewStreamCell: UITableViewCell {
     
 }
 
-class PeersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PeersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate {
     
+    @IBOutlet weak var searchBarForPeers: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -40,9 +41,9 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     var streamIds:[String] = []
     
     lazy var fetchTheUsers : FetchRequestController<User> = {
-        
+        let predicate:NSPredicate = NSPredicate(format: "status == %@","ACTIVE")
         let sortDescriptors = NSSortDescriptor(key: "firstName", ascending: true)
-        var query = container.viewContext.users.sort(using: sortDescriptors)
+        var query = container.viewContext.users.filter(using: predicate).sort(using: sortDescriptors)
         query.batchSize = 20
         let controller = query.toFetchRequestController()
         return controller
@@ -60,6 +61,10 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getDataFromDisc()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBarForPeers.endEditing(true)
     }
     
     func getDataFromDisc() {
@@ -192,6 +197,7 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBarForPeers.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
         switch entityType {
         case .user:
