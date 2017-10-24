@@ -9,7 +9,7 @@
 import UIKit
 import AlecrimCoreData
 
-class PeerTableViewCell: UITableViewCell {
+class PeerTableViewUserCell: UITableViewCell {
     
     @IBOutlet weak var emailId: UILabel!
     
@@ -17,17 +17,27 @@ class PeerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: UIImageView!
     
+    @IBOutlet weak var checkMark: UIImageView!
+}
+
+class PeerTableViewStreamCell: UITableViewCell {
+    
+    @IBOutlet weak var streamName: UILabel!
+    
+    @IBOutlet weak var checkMarkForStreams: UIImageView!
+    
 }
 
 class PeersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var j = false
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     
     var entityType: ConvType = .user
+    var userIds:[String] = []
+    var streamIds:[String] = []
     
     lazy var fetchTheUsers : FetchRequestController<User> = {
         
@@ -73,7 +83,7 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "With"
+        navigationController?.navigationBar.topItem?.title = "Attende"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,18 +116,13 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PeerTableViewCell
-        
         switch entityType {
             
         case .user:
             
             let userObject = fetchTheUsers.object(at: indexPath)
             
-            cell.emailId.isHidden = false
-            cell.profilePic.isHidden = false
-            cell.name.isHidden = false
-            cell.textLabel?.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! PeerTableViewUserCell
             
             cell.emailId.text = userObject.login
             
@@ -131,46 +136,102 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
                 if let imageURL = URL(string: photoURL) {
                     let data = try? Data(contentsOf: imageURL)
                     if let imageData = data {
-                        let mediumImage = UIImage(data: imageData)
-                        cell.profilePic.image = mediumImage
-                        cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2
-                        cell.profilePic.clipsToBounds = true
-                        cell.profilePic.layer.borderColor = UIColor.white.cgColor
-                        cell.profilePic.layer.borderWidth = 3
-                        
+                        if let mediumImage = UIImage(data: imageData) {
+                            circularImage(profileImage: mediumImage, cell: cell)
+                        }
                     }
                 }
+            } else {
+                let profileImage = #imageLiteral(resourceName: "icons8-Male User-40")
+                circularImage(profileImage: profileImage, cell: cell)
+                
             }
+            
+            let userId = userObject.id
+            if userIds.contains(userId) {
+                cell.checkMark.isHidden = false
+            } else {
+                cell.checkMark.isHidden = true
+            }
+            return cell
             
         case .stream:
             
-            cell.emailId.isHidden = true
-            cell.profilePic.isHidden = true
-            cell.name.isHidden = true
-            cell.textLabel?.isHidden = false
+            let userStream = fetchTheStreams.object(at: indexPath)
+            let streamCell = tableView.dequeueReusableCell(withIdentifier: "StreamCell", for: indexPath) as! PeerTableViewStreamCell
             
-            let userStreams = fetchTheStreams.object(at: indexPath)
-            cell.textLabel?.text = userStreams.name
+            streamCell.streamName.text = userStream.name
             
+            print("stream name \(userStream.name)")
+            
+            let streamId = userStream.id
+            
+            if streamIds.contains(streamId) {
+                print(streamId)
+                
+                print(indexPath)
+                streamCell.checkMarkForStreams.isHidden = false
+                print("checkmark selected")
+            } else {
+                streamCell.checkMarkForStreams.isHidden = true
+                print("checkmark not selected")
+            }
+            
+            return streamCell
         }
         
-        return cell
-        
+    }
+    
+    func circularImage(profileImage : UIImage, cell: PeerTableViewUserCell) {
+        cell.profilePic.image = profileImage
+        cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2
+        cell.profilePic.clipsToBounds = true
+        cell.profilePic.layer.borderColor = UIColor.white.cgColor
+        cell.profilePic.layer.borderWidth = 1
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let userObject = fetchTheUsers.object(at: indexPath)
-        print(userObject.photoId)
-        
-        if j == false {
-            j = true
-        } else {
-            j = false
-            tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch entityType {
+        case .user:
+            
+            let userObject = fetchTheUsers.object(at: indexPath)
+            let userId = userObject.id
+            
+            if userIds.contains(userId) {
+                if let index = userIds.index(of: userId) {
+                    userIds.remove(at: index)
+                    print("userid is:", userIds)
+                }
+            } else {
+                userIds.append(userId)
+                print(userIds)
+            }
+            
+            tableView.reloadData()
+            
+        case .stream:
+            
+            let streamObject = fetchTheStreams.object(at: indexPath)
+            let streamId = streamObject.id
+            
+            if streamIds.contains(streamId) {
+                if let index = streamIds.index(of: streamId) {
+                    streamIds.remove(at: index)
+                    print("userStreams is:", streamIds)
+                }
+            } else {
+                streamIds.append(streamId)
+                if streamIds.count > 1 {
+                    streamIds.removeFirst(streamIds.count - 1)
+                }
+            }
+            
+            print("Stream ID selected \(streamIds)")
+            
+            tableView.reloadData()
         }
-        
     }
     
     

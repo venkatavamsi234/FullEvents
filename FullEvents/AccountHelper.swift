@@ -25,15 +25,13 @@
             
         }
         
-        let params = ["scope": "awapis.identity"]
-        
         guard let accessToken = AccessTokenHelper.getAccessToken() else {
             
             return
             
         }
         
-        Alamofire.request(userInfoURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: ["Authorization": "Bearer \(accessToken)"]).responseJSON() { response in
+        Alamofire.request(userInfoURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: ["Authorization": "Bearer \(accessToken)"]).responseJSON() { response in
             
             switch response.result {
                 
