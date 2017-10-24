@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		265DF5170992BC6CE3B1EC58 /* Pods_FullEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */; };
+		CE42A5741F9F41D9007F2936 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5731F9F41D9007F2936 /* EventTableViewController.swift */; };
 		CE463EA61F9494230064BFA5 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE463EA51F9494230064BFA5 /* DashboardViewController.swift */; };
 		CE5ED6841F94B2CB0003C94E /* FullEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE5ED6821F94B2CB0003C94E /* FullEvents.xcdatamodeld */; };
 		CE85CF5F1F98E447007B0EC2 /* UserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */; };
@@ -38,6 +39,7 @@
 		254B8C76F2767F3877A3258E /* Pods_FullEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FullEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC1C863975FA28B75C693C5 /* Pods-FullEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.release.xcconfig"; sourceTree = "<group>"; };
 		5D70CAE32F78F3F546296A34 /* Pods-FullEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FullEvents/Pods-FullEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		CE42A5731F9F41D9007F2936 /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		CE463EA51F9494230064BFA5 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		CE5ED6831F94B2CB0003C94E /* FullEvents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullEvents.xcdatamodel; sourceTree = "<group>"; };
 		CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserExtension.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				CE8E00A21F8B7FB400D0EF7E /* LoginViewController.swift */,
 				CE8E00A41F8BDC5700D0EF7E /* TabBarViewController.swift */,
 				CE463EA51F9494230064BFA5 /* DashboardViewController.swift */,
+				CE42A5731F9F41D9007F2936 /* EventTableViewController.swift */,
 				CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */,
 				CECCABA01F9A571B00D28109 /* PeersViewController.swift */,
 				CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */,
@@ -326,6 +329,7 @@
 				CE85CF751F9901E5007B0EC2 /* UserService.swift in Sources */,
 				CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */,
 				CE8909B71F8E4D9200059F41 /* ProfileViewController.swift in Sources */,
+				CE42A5741F9F41D9007F2936 /* EventTableViewController.swift in Sources */,
 				CE85CF721F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift in Sources */,
 				CE463EA61F9494230064BFA5 /* DashboardViewController.swift in Sources */,
 				CECCABA11F9A571B00D28109 /* PeersViewController.swift in Sources */,
