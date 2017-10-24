@@ -28,10 +28,10 @@ class DashboardViewController: UIViewController {
     
     @IBAction func addingEvents(_ sender: Any) {
         
-        guard let eventViewController = storyboard?.instantiateViewController(withIdentifier: "EventTableViewController") as? EventTableViewController else {
-            return
-        }
-        self.navigationController?.present(eventViewController, animated: true, completion: nil)
+//        guard let eventViewController = storyboard?.instantiateViewController(withIdentifier: "EventTableViewController") as? EventTableViewController else {
+//            return
+//        }
+//        self.navigationController?.present(eventViewController, animated: true, completion: nil)
     }
     
     
