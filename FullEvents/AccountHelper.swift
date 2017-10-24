@@ -128,6 +128,7 @@
                     UserService.savingUserData(usersJson: usersJson)
                     
                     guard let cursor = user["cursor"].string, !cursor.isEmpty  else {
+                        UserDefaults.standard.removeObject(forKey: "cursorForContacts")
                         return
                     }
                     
