@@ -32,7 +32,7 @@ class AwStreamHelpers {
         
         
         if let cursorForStreams = cursor {
-            params["cursor"] = [cursorForStreams]
+            params["cursor"] = cursorForStreams
         }
         
         
@@ -58,6 +58,7 @@ class AwStreamHelpers {
                     print(streams)
                     
                     guard let cursor = data["cursor"].string, !cursor.isEmpty else  {
+                        UserDefaults.standard.removeObject(forKey: "cursorForStreams")
                         return
                     }
                     
