@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController, UITextFieldDelegate {
+class EventTableViewController: UITableViewController, UITextFieldDelegate, DataPassingDelegate{
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
@@ -39,6 +39,7 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
         dateAndTimePicker.layer.borderColor = UIColor.black.cgColor
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 60)
         navigationBar.topItem?.title = "Create Event"
@@ -93,12 +94,19 @@ class EventTableViewController: UITableViewController, UITextFieldDelegate {
     
     
     @IBAction func pickingDateAndTime(_ sender: UIButton) {
-            guard let datePickerViewController = storyboard?.instantiateViewController(withIdentifier: "DatepickerAndTimeViewController") as? DatepickerAndTimeViewController else {
-                return
-            }
-            
-            self.present(datePickerViewController, animated: true, completion: nil)
+        
+        guard let datePickerViewController = storyboard?.instantiateViewController(withIdentifier: "DatepickerAndTimeViewController") as? DatepickerAndTimeViewController else {
+            return
         }
+        datePickerViewController.delegate = self
+        datePickerViewController.modalPresentationStyle = .overCurrentContext
+        
+        self.present(datePickerViewController, animated: true, completion: nil)
+    }
+    
+    func passData(date: String) {
+        dateAndTimePicker.setTitle(date, for: .normal)
+    }
     
     @IBAction func dismissEventTableView(_ sender: UIBarButtonItem) {
         

@@ -16,5 +16,6 @@ extension NSManagedObjectContext {
     
     var users: Table<User> { return Table<User>(context : self) }
     var streams: Table<UserStreams> { return Table<UserStreams>(context : self) }
+    var event: Table<Event> { return Table<Event>(context: self)}
     
 }
