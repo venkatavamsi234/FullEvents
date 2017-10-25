@@ -147,7 +147,7 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
                     }
                 }
             } else {
-                let profileImage = #imageLiteral(resourceName: "icons8-Male User-40")
+                let profileImage = #imageLiteral(resourceName: "PersonDummyImage")
                 circularImage(profileImage: profileImage, cell: cell)
                 
             }
@@ -172,14 +172,9 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
             let streamId = userStream.id
             
             if streamIds.contains(streamId) {
-                print(streamId)
-                
-                print(indexPath)
                 streamCell.checkMarkForStreams.isHidden = false
-                print("checkmark selected")
             } else {
                 streamCell.checkMarkForStreams.isHidden = true
-                print("checkmark not selected")
             }
             
             return streamCell
@@ -208,11 +203,9 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
             if userIds.contains(userId) {
                 if let index = userIds.index(of: userId) {
                     userIds.remove(at: index)
-                    print("userid is:", userIds)
                 }
             } else {
                 userIds.append(userId)
-                print(userIds)
             }
             
             tableView.reloadData()
