@@ -1,9 +1,9 @@
 //
 //  Event+CoreDataProperties.swift
-//  FullEvents
+//  
 //
-//  Created by user on 25/10/17.
-//  Copyright © 2017 user. All rights reserved.
+//  Created by user on 27/10/17.
+//
 //
 
 import Foundation
@@ -16,12 +16,15 @@ extension Event {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
+    @NSManaged public var eventDescrip: String?
+    @NSManaged public var startDate: Int64
     @NSManaged public var eventName: String?
-    @NSManaged public var date: Int64
-    @NSManaged public var time: Int64
-    @NSManaged public var content: String?
+    @NSManaged public var `repeat`: NSObject?
     @NSManaged public var greetings: String?
     @NSManaged public var remindBefore: Int64
-    @NSManaged public var eventRepeating: NSObject?
+    @NSManaged public var streamIds: NSObject?
+    @NSManaged public var duration: Int64
+    @NSManaged public var userIds: NSObject?
+    @NSManaged public var endDate: Int64
 
 }
