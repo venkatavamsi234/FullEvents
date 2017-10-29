@@ -28,11 +28,24 @@ class PeerTableViewStreamCell: UITableViewCell {
     
 }
 
-class PeersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate {
+class PeersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBarForPeers: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    // search label corresponds to results not found label in storyboard.
+    @IBOutlet weak var searchLabel: UILabel!
+    
+    
+    var searchBarActive = false
+    
+    var searchBarText = String()
+    
+    var getTheUserObject = User()
+    var getTheStreamObject = UserStreams()
+    
+    var filteredObjectsForUsers = Table<User>(context: container.viewContext)
+    var filteredObjectsForStreams = Table<UserStreams>(context: container.viewContext)
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     
@@ -59,13 +72,14 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     }()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        searchBarForPeers.setShowsCancelButton(false, animated: false)
+        searchBarForPeers.delegate = self
+        tableView.delegate = self
         self.getDataFromDisc()
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        searchBarForPeers.endEditing(true)
-    }
     
     func getDataFromDisc() {
         
@@ -85,10 +99,84 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBarForPeers.endEditing(true)
+    }
     
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        switch  entityType {
+            
+        case .user:
+            
+            let searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ || login CONTAINS[c] %@",searchText,searchText)
+            
+            filteredObjectsForUsers = container.viewContext.users.filter(using: searchPredicate)
+            
+            searchBarText = searchText
+            
+            print("fetched objects: \(filteredObjectsForUsers.count())")
+            
+            if filteredObjectsForUsers.count() == 0 {
+                
+                searchBarActive = false
+                
+            }
+            else{
+                
+                self.tableView.backgroundView = .none
+                
+                searchBarActive = true
+            }
+            
+            self.tableView.reloadData()
+            
+        case .stream:
+            let searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchText)
+            
+            filteredObjectsForStreams = container.viewContext.streams.filter(using: searchPredicate)
+            
+            searchBarText = searchText
+            
+            print("fetched objects: \(filteredObjectsForStreams.count())")
+            
+            if filteredObjectsForStreams.count() == 0 {
+                
+                searchBarActive = false
+                
+            }
+            else{
+                
+                self.tableView.backgroundView = .none
+                
+                searchBarActive = true
+            }
+            
+            self.tableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        
+        searchBarText = ""
+        searchBar.text = nil
+        
+        searchBarActive = false
+        searchBar.setShowsCancelButton(false, animated: true)
+        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         navigationController?.navigationBar.topItem?.title = "Attende"
+        searchLabel.isHidden = true
+        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,10 +184,18 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
         switch  entityType {
             
         case .user:
-            return fetchTheUsers.numberOfSections()
+            if searchBarActive {
+                return 1
+            } else {
+                return fetchTheUsers.numberOfSections()
+            }
             
         case .stream:
-            return fetchTheStreams.numberOfSections()
+            if searchBarActive {
+                return 1
+            } else {
+                return fetchTheStreams.numberOfSections()
+            }
             
         }
     }
@@ -110,12 +206,18 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
         switch entityType {
             
         case .user :
-            return fetchTheUsers.sections[section].numberOfObjects
-            
+            if searchBarActive {
+                return filteredObjectsForUsers.execute().count
+            } else {
+                return fetchTheUsers.sections[section].numberOfObjects
+            }
             
         case .stream:
-            return fetchTheStreams.sections[section].numberOfObjects
-            
+            if searchBarActive {
+                return filteredObjectsForStreams.execute().count
+            } else {
+                return fetchTheStreams.sections[section].numberOfObjects
+            }
         }
     }
     
@@ -125,18 +227,29 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         case .user:
             
-            let userObject = fetchTheUsers.object(at: indexPath)
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! PeerTableViewUserCell
             
-            cell.emailId.text = userObject.login
+            if searchBarActive {
+                getTheUserObject = filteredObjectsForUsers.execute()[indexPath.row]
+            } else {
+                getTheUserObject = fetchTheUsers.object(at: indexPath)
+            }
             
-            let firstName = userObject.firstName
-            let lastName = userObject.lastName
+            if (filteredObjectsForUsers.count() == 0 && !searchBarText.isEmpty) {
+                cell.isHidden = true
+                searchLabel.isHidden = false
+            } else {
+                searchLabel.isHidden = true
+            }
+            
+            cell.emailId.text = getTheUserObject.login
+            
+            let firstName = getTheUserObject.firstName
+            let lastName = getTheUserObject.lastName
             let fullName = firstName + lastName
             cell.name.text = fullName
             
-            let photoURL = userObject.photoId
+            let photoURL = getTheUserObject.photoId
             if !photoURL.isEmpty{
                 if let imageURL = URL(string: photoURL) {
                     let data = try? Data(contentsOf: imageURL)
@@ -152,7 +265,7 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
             }
             
-            let userId = userObject.id
+            let userId = getTheUserObject.id
             if userIds.contains(userId) {
                 cell.checkMark.isHidden = false
             } else {
@@ -162,14 +275,21 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         case .stream:
             
-            let userStream = fetchTheStreams.object(at: indexPath)
             let streamCell = tableView.dequeueReusableCell(withIdentifier: "StreamCell", for: indexPath) as! PeerTableViewStreamCell
             
-            streamCell.streamName.text = userStream.name
+            if searchBarActive {
+                getTheStreamObject = filteredObjectsForStreams.execute()[indexPath.row]
+                
+            } else {
+                getTheStreamObject = fetchTheStreams.object(at: indexPath)
+                
+            }
             
-            print("stream name \(userStream.name)")
+            streamCell.streamName.text = getTheStreamObject.name
             
-            let streamId = userStream.id
+            print("stream name \(getTheStreamObject.name)")
+            
+            let streamId = getTheStreamObject.id
             
             if streamIds.contains(streamId) {
                 streamCell.checkMarkForStreams.isHidden = false
@@ -192,44 +312,58 @@ class PeersViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         searchBarForPeers.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
+        
         switch entityType {
         case .user:
             
-            let userObject = fetchTheUsers.object(at: indexPath)
-            let userId = userObject.id
-            
-            if userIds.contains(userId) {
-                if let index = userIds.index(of: userId) {
-                    userIds.remove(at: index)
-                }
-            } else {
-                userIds.append(userId)
+            if searchBarActive {
+                getTheUserObject = filteredObjectsForUsers.execute()[indexPath.row]
+                
             }
-            
-            tableView.reloadData()
+                
+            else {
+                
+                getTheUserObject = fetchTheUsers.object(at: indexPath)
+                let userId = getTheUserObject.id
+                
+                if userIds.contains(userId) {
+                    if let index = userIds.index(of: userId) {
+                        userIds.remove(at: index)
+                    }
+                } else {
+                    userIds.append(userId)
+                }
+                
+                tableView.reloadData()
+            }
             
         case .stream:
             
-            let streamObject = fetchTheStreams.object(at: indexPath)
-            let streamId = streamObject.id
-            
-            if streamIds.contains(streamId) {
-                if let index = streamIds.index(of: streamId) {
-                    streamIds.remove(at: index)
-                    print("userStreams is:", streamIds)
-                }
+            if searchBarActive {
+                getTheStreamObject = filteredObjectsForStreams.execute()[indexPath.row]
             } else {
-                streamIds.append(streamId)
-                if streamIds.count > 1 {
-                    streamIds.removeFirst(streamIds.count - 1)
+                getTheStreamObject = fetchTheStreams.object(at: indexPath)
+                let streamId = getTheStreamObject.id
+                
+                if streamIds.contains(streamId) {
+                    if let index = streamIds.index(of: streamId) {
+                        streamIds.remove(at: index)
+                        print("userStreams is:", streamIds)
+                    }
+                } else {
+                    streamIds.append(streamId)
+                    if streamIds.count > 1 {
+                        streamIds.removeFirst(streamIds.count - 1)
+                    }
                 }
+                
+                print("Stream ID selected \(streamIds)")
+                
+                tableView.reloadData()
             }
-            
-            print("Stream ID selected \(streamIds)")
-            
-            tableView.reloadData()
         }
     }
     
