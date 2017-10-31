@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DataPassingDelegate {
-    func passData(date: String)
+    func passData(date: Date)
 }
 
 class DatepickerAndTimeViewController: UIViewController {
@@ -17,11 +17,14 @@ class DatepickerAndTimeViewController: UIViewController {
     var delegate: DataPassingDelegate?
     
     @IBOutlet weak var datepicker: UIDatePicker!
+    var selectedDate: Date?
+    var minimumDate: Date?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        datepicker.minimumDate = minimumDate
+        datepicker.date = selectedDate ?? Date()
     }
     
     @IBAction func hideDatePicker(_ sender: UIButton) {
@@ -30,17 +33,10 @@ class DatepickerAndTimeViewController: UIViewController {
 
     }
    
-    
-    
     @IBAction func doneButton(_ sender: UIButton) {
-        
         let date = datepicker.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM-dd-yyyy hh:mm a"
-        let dateString = dateFormatter.string(from: date)
-        delegate?.passData(date: dateString)
+        delegate?.passData(date: date)
         self.dismiss(animated: true, completion: nil)
-
     }
  
     

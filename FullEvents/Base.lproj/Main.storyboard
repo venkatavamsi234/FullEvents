@@ -548,7 +548,7 @@
                                                 </constraints>
                                                 <state key="normal" title="Done"/>
                                                 <connections>
-                                                    <action selector="doneButton:" destination="5PQ-hS-QKv" eventType="touchUpInside" id="8g3-S5-CwE"/>
+                                                    <action selector="doneButton:" destination="5PQ-hS-QKv" eventType="touchUpInside" id="zIu-VI-2yo"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -616,7 +616,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osi-Ax-b8M">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="JL8-lM-xf1" kind="embed" id="iMz-yE-Gbd"/>
+                                    <segue destination="JL8-lM-xf1" kind="embed" identifier="EventBaseViewController" id="iMz-yE-Gbd"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -644,6 +644,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="mGJ-sn-mFG" kind="relationship" relationship="rootViewController" id="OVk-dY-ogg"/>
+                        <segue destination="qzd-np-26T" kind="show" id="1sa-Mi-72F"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xg-uT-Kez" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -727,7 +728,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="ToT-Vi-yO1"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="axR-JP-gX8">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="axR-JP-gX8">
                                                     <rect key="frame" x="10" y="1" width="355" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="7Z9-6c-2og"/>
@@ -776,11 +777,11 @@
             </objects>
             <point key="canvasLocation" x="6562.3999999999996" y="-375.56221889055473"/>
         </scene>
-        <!--Event Date Table View Controller-->
+        <!--Event Date-->
         <scene sceneID="V7P-cs-L15">
             <objects>
                 <tableViewController storyboardIdentifier="EventDateTableViewController" id="qzd-np-26T" customClass="EventDateTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PNL-e7-31w">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PNL-e7-31w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -790,11 +791,11 @@
                         <sections>
                             <tableViewSection headerTitle="          " id="71A-Hj-gvu">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Ke3-hh-kzx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="Ke3-hh-kzx">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ke3-hh-kzx" id="EJ2-OU-oXr">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96C-nd-lDZ">
@@ -807,8 +808,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCK-Aj-b6N">
-                                                    <rect key="frame" x="160" y="0.0" width="205" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCK-Aj-b6N">
+                                                    <rect key="frame" x="160" y="0.0" width="172" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="iRq-4b-dRD"/>
                                                     </constraints>
@@ -829,11 +830,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Gae-2a-jOG">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="Gae-2a-jOG">
                                         <rect key="frame" x="0.0" y="78" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gae-2a-jOG" id="8Ae-h0-bbi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xce-fi-SAE">
@@ -846,12 +847,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14U-5g-NIs">
-                                                    <rect key="frame" x="160" y="0.0" width="205" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14U-5g-NIs">
+                                                    <rect key="frame" x="160" y="0.0" width="172" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="5yN-qI-JEA"/>
                                                     </constraints>
-                                                    <state key="normal" title="End Date">
+                                                    <state key="normal" title="Choose Date">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
@@ -872,11 +873,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="          " id="gD0-gr-nYi">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="CpL-Np-8Oa">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="CpL-Np-8Oa">
                                         <rect key="frame" x="0.0" y="156" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CpL-Np-8Oa" id="yaV-zF-E3y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GG8-p6-TYs">
@@ -889,8 +890,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mz-Ml-O9S">
-                                                    <rect key="frame" x="160" y="0.0" width="205" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mz-Ml-O9S">
+                                                    <rect key="frame" x="160" y="0.0" width="172" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="j1C-uy-aRd"/>
                                                     </constraints>
@@ -916,6 +917,15 @@
                             <outlet property="delegate" destination="qzd-np-26T" id="yIg-W1-oBA"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Event Date" id="oRy-3v-UdM">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="0iQ-JJ-UDr">
+                            <connections>
+                                <action selector="redirectingToContactsAndStreamsVC:" destination="qzd-np-26T" id="dVX-4w-7wO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chooseDateLabel" destination="yCK-Aj-b6N" id="6bt-oi-UT8"/>
                         <outlet property="endDate" destination="xce-fi-SAE" id="x7N-hB-F3s"/>
