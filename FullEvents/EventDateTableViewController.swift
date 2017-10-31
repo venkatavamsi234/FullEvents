@@ -19,10 +19,11 @@ class EventDateTableViewController: UITableViewController, DataPassingDelegate {
         case startDate
         case endDate
     }
-
+    
     var dateMode: DateMode = .startDate
     var datePickerViewController:DatepickerAndTimeViewController?
     var chosedStartDate: Date?, chosedEndDate: Date?
+    var dateString = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class EventDateTableViewController: UITableViewController, DataPassingDelegate {
         }
         
         datePickerViewController.modalPresentationStyle = .overCurrentContext
+        
         datePickerViewController.delegate = self
         datePickerViewController.minimumDate = chosedStartDate ?? Date()
         datePickerViewController.selectedDate = (dateMode == .startDate) ? chosedStartDate : chosedEndDate
@@ -58,30 +60,72 @@ class EventDateTableViewController: UITableViewController, DataPassingDelegate {
     }
     
     
-    func passData(date: Date) {
+    func passData(choosenDate: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd-yyyy hh:mm a"
-        let dateString = dateFormatter.string(from: date)
+        dateString = dateFormatter.string(from: choosenDate)
+        
         switch dateMode {
+            
         case .startDate:
-            chooseDateLabel.setTitle(dateString, for: .normal)
-            chosedStartDate = date
+            if  let selectedEndDate = chosedEndDate {
+                if choosenDate < selectedEndDate {
+                    chooseDateLabel.setTitle(dateString, for: .normal)
+                    chosedStartDate = choosenDate
+                } else {
+                    let alert = UIAlertController(title: "", message: "Start date cannot be greater than end date", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }  else {
+                chooseDateLabel.setTitle(dateString, for: .normal)
+                chosedStartDate = choosenDate
+            }
+            
         case .endDate:
-            chosedEndDate = date
-            endDateLabel.setTitle(dateString, for: .normal)
+            
+            guard let selectedStartDate = chosedStartDate else { return }
+            
+            let differenceOfDates = Calendar.current.dateComponents([.minute], from: selectedStartDate, to: choosenDate)
+            
+            if differenceOfDates.minute ?? 0 >= 5 {
+                chosedEndDate = choosenDate
+                endDateLabel.setTitle(dateString, for: .normal)
+            } else {
+                let alert = UIAlertController(title: "", message: "End date should be atleast 5 mins greater than start date", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
         }
     }
     
     @IBAction func endDate(_ sender: UIButton) {
+        
+        guard chosedStartDate != nil else {
+            let alert = UIAlertController(title: "", message: "Start date is required", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         dateMode = .endDate
         presentDatePicker()
     }
     
     @IBAction func redirectingToContactsAndStreamsVC(_ sender: UIBarButtonItem) {
-        guard let peersViewController = storyboard?.instantiateViewController(withIdentifier: "PeersViewController") as? PeersViewController else {
-            return
+        
+        if (chosedStartDate != nil) && chosedEndDate != nil {
+            guard let contactsAndStreamsViewController = storyboard?.instantiateViewController(withIdentifier: "ContactsAndStreamsViewController") as? ContactsAndStreamsViewController else {
+                return
+            }
+            navigationController?.pushViewController(contactsAndStreamsViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "", message: "Start date and end date is required", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
+            self.present(alert, animated: true, completion: nil)
+            
         }
-        navigationController?.pushViewController(peersViewController, animated: true)
     }
     
 }

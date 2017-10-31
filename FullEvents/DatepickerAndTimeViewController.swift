@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DataPassingDelegate {
-    func passData(date: Date)
+    func passData(choosenDate: Date)
 }
 
 class DatepickerAndTimeViewController: UIViewController {
@@ -35,7 +35,7 @@ class DatepickerAndTimeViewController: UIViewController {
    
     @IBAction func doneButton(_ sender: UIButton) {
         let date = datepicker.date
-        delegate?.passData(date: date)
+        delegate?.passData(choosenDate: date)
         self.dismiss(animated: true, completion: nil)
     }
  
