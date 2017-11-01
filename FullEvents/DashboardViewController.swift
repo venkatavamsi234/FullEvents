@@ -22,16 +22,16 @@ class DashboardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
       
-        navigationController?.navigationBar.topItem?.title = "Dashboard"
+        navigationController?.navigationBar.topItem?.title = "Events"
         
     }
     
     @IBAction func addingEvents(_ sender: Any) {
         
-        guard let eventViewController = storyboard?.instantiateViewController(withIdentifier: "EventTableViewController") as? EventTableViewController else {
+        guard let eventBaseViewController = storyboard?.instantiateViewController(withIdentifier: "EventBaseViewController") as? EventBaseViewController else {
             return
         }
-        self.navigationController?.present(eventViewController, animated: true, completion: nil)
+        self.navigationController?.present(eventBaseViewController, animated: true, completion: nil)
     }
     
     

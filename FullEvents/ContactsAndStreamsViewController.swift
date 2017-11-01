@@ -255,6 +255,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             } else {
                 cell.checkMark.isHidden = true
             }
+            
             return cell
             
         case .stream:
@@ -269,13 +270,20 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
                 
             }
             
+            if (filteredObjectsForStreams.count() == 0 && !searchBarText.isEmpty) {
+                streamCell.isHidden = true
+                searchLabel.isHidden = false
+            } else {
+                searchLabel.isHidden = true
+            }
+            
             streamCell.streamName.text = getTheStreamObject.name
             
             let streamId = getTheStreamObject.id
             
             if streamIds.contains(streamId) {
                 streamCell.checkMarkForStreams.isHidden = false
-            } else {
+            }  else {
                 streamCell.checkMarkForStreams.isHidden = true
             }
             
@@ -332,23 +340,27 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             
             if searchBarActive {
                 getTheUserObject = filteredObjectsForUsers.execute()[indexPath.row]
-                selectingContacts()
             }
                 
             else {
                 
                 getTheUserObject = fetchTheUsers.object(at: indexPath)
-                selectingContacts()
             }
+            selectingContacts()
             
         case .stream:
             
             if searchBarActive {
                 getTheStreamObject = filteredObjectsForStreams.execute()[indexPath.row]
-                selectingStreams()
             } else {
                 getTheStreamObject = fetchTheStreams.object(at: indexPath)
-                selectingStreams()
+            }
+            selectingStreams()
+            if streamIds != [] {
+                guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
+                    return
+                }
+                navigationController?.pushViewController(eventDetailsViewController, animated: true)
             }
         }
     }

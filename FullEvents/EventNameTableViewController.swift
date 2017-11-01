@@ -11,6 +11,8 @@ import UIKit
 class EventNameTableViewController: UITableViewController, UITextViewDelegate,UITextFieldDelegate {
 
     @IBOutlet weak var eventName: UITextField!
+    @IBOutlet weak var eventDescription: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
