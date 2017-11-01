@@ -22,6 +22,11 @@
 		CE8909B31F8DF12C00059F41 /* AwStreamHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B21F8DF12C00059F41 /* AwStreamHelpers.swift */; };
 		CE8909B51F8E4A4200059F41 /* AccountHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B41F8E4A4200059F41 /* AccountHelper.swift */; };
 		CE8909B71F8E4D9200059F41 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */; };
+		CE8AEB601FA1B9B600A457BA /* EventBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEB5F1FA1B9B600A457BA /* EventBaseViewController.swift */; };
+		CE8AEB661FA30B1800A457BA /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEB651FA30B1800A457BA /* Event+CoreDataClass.swift */; };
+		CE8AEB681FA30B2200A457BA /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEB671FA30B2200A457BA /* Event+CoreDataProperties.swift */; };
+		CE8AEB6A1FA3133400A457BA /* EventNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEB691FA3133400A457BA /* EventNameTableViewController.swift */; };
+		CE8AEB6C1FA35FC700A457BA /* EventDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEB6B1FA35FC700A457BA /* EventDateTableViewController.swift */; };
 		CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */; };
 		CE8E00931F8B77D700D0EF7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00911F8B77D700D0EF7E /* Main.storyboard */; };
 		CE8E00981F8B77D700D0EF7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8E00971F8B77D700D0EF7E /* Assets.xcassets */; };
@@ -33,7 +38,7 @@
 		CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */; };
 		CE8E00B31F8CF25400D0EF7E /* AccessTokenHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00B21F8CF25400D0EF7E /* AccessTokenHelper.swift */; };
 		CE8E00B51F8CFB0C00D0EF7E /* ConstantsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E00B41F8CFB0C00D0EF7E /* ConstantsHelper.swift */; };
-		CECCABA11F9A571B00D28109 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCABA01F9A571B00D28109 /* PeersViewController.swift */; };
+		CECCABA11F9A571B00D28109 /* ContactsAndStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCABA01F9A571B00D28109 /* ContactsAndStreamsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +59,11 @@
 		CE8909B21F8DF12C00059F41 /* AwStreamHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwStreamHelpers.swift; sourceTree = "<group>"; };
 		CE8909B41F8E4A4200059F41 /* AccountHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountHelper.swift; sourceTree = "<group>"; };
 		CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE8AEB5F1FA1B9B600A457BA /* EventBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBaseViewController.swift; sourceTree = "<group>"; };
+		CE8AEB651FA30B1800A457BA /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE8AEB671FA30B2200A457BA /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE8AEB691FA3133400A457BA /* EventNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNameTableViewController.swift; sourceTree = "<group>"; };
+		CE8AEB6B1FA35FC700A457BA /* EventDateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDateTableViewController.swift; sourceTree = "<group>"; };
 		CE8E008A1F8B77D700D0EF7E /* FullEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8E008D1F8B77D700D0EF7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8E00921F8B77D700D0EF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,7 +77,7 @@
 		CE8E00AE1F8CA18A00D0EF7E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		CE8E00B21F8CF25400D0EF7E /* AccessTokenHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessTokenHelper.swift; sourceTree = "<group>"; };
 		CE8E00B41F8CFB0C00D0EF7E /* ConstantsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsHelper.swift; sourceTree = "<group>"; };
-		CECCABA01F9A571B00D28109 /* PeersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
+		CECCABA01F9A571B00D28109 /* ContactsAndStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAndStreamsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,8 @@
 				CE85CF6F1F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift */,
 				CE85CF741F9901E5007B0EC2 /* UserService.swift */,
 				CE85CF6A1F98F754007B0EC2 /* StreamService.swift */,
+				CE8AEB651FA30B1800A457BA /* Event+CoreDataClass.swift */,
+				CE8AEB671FA30B2200A457BA /* Event+CoreDataProperties.swift */,
 				CE5ED6821F94B2CB0003C94E /* FullEvents.xcdatamodeld */,
 				CE85CF5E1F98E447007B0EC2 /* UserExtension.swift */,
 			);
@@ -143,9 +155,12 @@
 				CE463EA51F9494230064BFA5 /* DashboardViewController.swift */,
 				CE42A5731F9F41D9007F2936 /* EventTableViewController.swift */,
 				CE8E00AC1F8C9F1B00D0EF7E /* SettingsTableViewController.swift */,
-				CECCABA01F9A571B00D28109 /* PeersViewController.swift */,
+				CECCABA01F9A571B00D28109 /* ContactsAndStreamsViewController.swift */,
 				CE8909B61F8E4D9200059F41 /* ProfileViewController.swift */,
 				CE44B0561FA093C00036FC92 /* DatepickerAndTimeViewController.swift */,
+				CE8AEB5F1FA1B9B600A457BA /* EventBaseViewController.swift */,
+				CE8AEB691FA3133400A457BA /* EventNameTableViewController.swift */,
+				CE8AEB6B1FA35FC700A457BA /* EventDateTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -326,8 +341,11 @@
 			files = (
 				CE8E00B51F8CFB0C00D0EF7E /* ConstantsHelper.swift in Sources */,
 				CE8909B31F8DF12C00059F41 /* AwStreamHelpers.swift in Sources */,
+				CE8AEB681FA30B2200A457BA /* Event+CoreDataProperties.swift in Sources */,
 				CE8909B51F8E4A4200059F41 /* AccountHelper.swift in Sources */,
+				CE8AEB661FA30B1800A457BA /* Event+CoreDataClass.swift in Sources */,
 				CE8E00A51F8BDC5700D0EF7E /* TabBarViewController.swift in Sources */,
+				CE8AEB601FA1B9B600A457BA /* EventBaseViewController.swift in Sources */,
 				CE8E00A31F8B7FB400D0EF7E /* LoginViewController.swift in Sources */,
 				CE85CF751F9901E5007B0EC2 /* UserService.swift in Sources */,
 				CE8E00AD1F8C9F1B00D0EF7E /* SettingsTableViewController.swift in Sources */,
@@ -336,10 +354,12 @@
 				CE42A5741F9F41D9007F2936 /* EventTableViewController.swift in Sources */,
 				CE85CF721F9901A0007B0EC2 /* UserStreams+CoreDataClass.swift in Sources */,
 				CE463EA61F9494230064BFA5 /* DashboardViewController.swift in Sources */,
-				CECCABA11F9A571B00D28109 /* PeersViewController.swift in Sources */,
+				CECCABA11F9A571B00D28109 /* ContactsAndStreamsViewController.swift in Sources */,
+				CE8AEB6A1FA3133400A457BA /* EventNameTableViewController.swift in Sources */,
 				CE85CF711F9901A0007B0EC2 /* User+CoreDataProperties.swift in Sources */,
 				CE85CF5F1F98E447007B0EC2 /* UserExtension.swift in Sources */,
 				CE8E008E1F8B77D700D0EF7E /* AppDelegate.swift in Sources */,
+				CE8AEB6C1FA35FC700A457BA /* EventDateTableViewController.swift in Sources */,
 				CE85CF731F9901A0007B0EC2 /* UserStreams+CoreDataProperties.swift in Sources */,
 				CE8E00AF1F8CA18A00D0EF7E /* NavigationViewController.swift in Sources */,
 				CE8E00B31F8CF25400D0EF7E /* AccessTokenHelper.swift in Sources */,
