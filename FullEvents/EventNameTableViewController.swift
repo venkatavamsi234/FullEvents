@@ -8,10 +8,16 @@
 
 import UIKit
 
-class EventNameTableViewController: UITableViewController, UITextViewDelegate,UITextFieldDelegate {
+protocol PassingEventNameAndEventDescriptionDelegate{
+    func PassingEventNameAndEventDescription(eventName: String, eventDescription: String?)
+}
 
+class EventNameTableViewController: UITableViewController, UITextViewDelegate,UITextFieldDelegate {
+    
     @IBOutlet weak var eventName: UITextField!
     @IBOutlet weak var eventDescription: UITextField!
+    
+    var eventNameDelegate: PassingEventNameAndEventDescriptionDelegate?
     
     
     override func viewDidLoad() {
@@ -44,8 +50,15 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
             return
         }
         
+        let eventDesc = eventDescription.text
+        eventNameDelegate?.PassingEventNameAndEventDescription(eventName: nameOfEvent, eventDescription: eventDesc)
+        
         guard let eventDateViewController = storyboard?.instantiateViewController(withIdentifier: "EventDateTableViewController") as? EventDateTableViewController else {
             return
+        }
+        
+        if let parent = navigationController?.parent as? EventBaseViewController {
+            eventDateViewController.eventDateDelegate = parent
         }
         
         navigationController?.pushViewController(eventDateViewController, animated: true)

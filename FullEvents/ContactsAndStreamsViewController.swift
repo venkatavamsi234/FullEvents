@@ -9,6 +9,11 @@
 import UIKit
 import AlecrimCoreData
 
+protocol PassingContactsAndStreamsDelegate {
+    func PassingContacts(contacts: Array<String>)
+    func PassingStreams(stream: Array<String>)
+}
+
 class PeerTableViewUserCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
@@ -30,6 +35,10 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     
     @IBOutlet weak var searchBarForPeers: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    var eventContactsDelegate : PassingContactsAndStreamsDelegate?
+    
+    
     
     // Search label corresponds to results not found label in storyboard.
     @IBOutlet weak var searchLabel: UILabel!
@@ -228,6 +237,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
                 searchLabel.isHidden = true
             }
             
+            
             let firstName = getTheUserObject.firstName
             let lastName = getTheUserObject.lastName
             let fullName = firstName + lastName
@@ -309,7 +319,6 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             }
         } else {
             userIds.append(userId)
-            print(userIds)
         }
         tableView.reloadData()
     }
@@ -357,9 +366,17 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             }
             selectingStreams()
             if streamIds != [] {
+                let contactNames = UserService.getContactUsingId(contactId: userIds)
+                eventContactsDelegate?.PassingContacts(contacts: contactNames)
+                let selectedStream = StreamService.getSelectedStream(streamId: streamIds)
+                eventContactsDelegate?.PassingStreams(stream: selectedStream)
                 guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
                     return
                 }
+                guard let parent = navigationController?.parent as? EventBaseViewController else {
+                    return
+                }
+                eventDetailsViewController.eventInfo = parent.event
                 navigationController?.pushViewController(eventDetailsViewController, animated: true)
             }
         }
@@ -367,7 +384,6 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     
     
     enum ConvType {
-        
         case user
         case stream
     }
@@ -376,13 +392,10 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         if sender.selectedSegmentIndex == 0 {
             entityType = .user
             getDataFromDisc()
-            
         } else {
             entityType = .stream
             getDataFromDisc()
         }
     }
-    
-    
-    
+
 }

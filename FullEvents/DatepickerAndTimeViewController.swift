@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol DataPassingDelegate {
+protocol DatePassingDelegate {
     func passData(choosenDate: Date)
 }
 
 class DatepickerAndTimeViewController: UIViewController {
     
-    var delegate: DataPassingDelegate?
+    var delegate: DatePassingDelegate?
     
     @IBOutlet weak var datepicker: UIDatePicker!
     var selectedDate: Date?

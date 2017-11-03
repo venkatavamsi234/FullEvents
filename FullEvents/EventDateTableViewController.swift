@@ -8,12 +8,18 @@
 
 import UIKit
 
-class EventDateTableViewController: UITableViewController, DataPassingDelegate {
+protocol PassingDatesDelegate {
+    func passingDates(startDate: String, endDate: String)
+}
+
+class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var chooseDateLabel: UIButton!
     @IBOutlet weak var endDateLabel: UIButton!
+    
+    var eventDateDelegate: PassingDatesDelegate?
     
     enum DateMode: String {
         case startDate
@@ -59,12 +65,16 @@ class EventDateTableViewController: UITableViewController, DataPassingDelegate {
         presentDatePicker()
     }
     
-    
-    func passData(choosenDate: Date) {
+    func dateConversionToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd-yyyy hh:mm a"
-        dateString = dateFormatter.string(from: choosenDate)
+        return dateFormatter.string(from: date)
         
+    }
+    
+    
+    func passData(choosenDate: Date) {
+        dateString = dateConversionToString(date: choosenDate)
         switch dateMode {
             
         case .startDate:
@@ -116,10 +126,18 @@ class EventDateTableViewController: UITableViewController, DataPassingDelegate {
     @IBAction func redirectingToContactsAndStreamsVC(_ sender: UIBarButtonItem) {
         
         if (chosedStartDate != nil) && chosedEndDate != nil {
+            let startDateString = dateConversionToString(date: chosedStartDate!),  endDateString = dateConversionToString(date: chosedEndDate!)
+            eventDateDelegate?.passingDates(startDate: startDateString , endDate: endDateString)
             guard let contactsAndStreamsViewController = storyboard?.instantiateViewController(withIdentifier: "ContactsAndStreamsViewController") as? ContactsAndStreamsViewController else {
                 return
             }
+            
+            if let parent = navigationController?.parent as? EventBaseViewController {
+              contactsAndStreamsViewController.eventContactsDelegate = parent
+            }
             navigationController?.pushViewController(contactsAndStreamsViewController, animated: true)
+            
+            
         } else {
             let alert = UIAlertController(title: "", message: "Start date and end date is required", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))

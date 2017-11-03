@@ -46,4 +46,15 @@ class StreamService {
         save()
     }
     
+    class func getSelectedStream(streamId: Array<String>) -> [String] {
+        
+        var selectedStream:[String] = []
+        
+        let streamContext = container.viewContext.streams
+        let stream = streamContext.first { $0.id == streamId[0] }
+        let streamName = (stream?.name)!
+        selectedStream.append(streamName)
+        return selectedStream
+    }
+    
 }
