@@ -32,6 +32,7 @@ class DashboardViewController: UIViewController {
             return
         }
         self.navigationController?.present(eventBaseViewController, animated: true, completion: nil)
+        
     }
     
     

@@ -128,9 +128,6 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
                 return
             }
             
-            if let parent = navigationController?.parent as? EventBaseViewController {
-              contactsAndStreamsViewController.eventContactsDelegate = parent
-            }
             navigationController?.pushViewController(contactsAndStreamsViewController, animated: true)
             
             

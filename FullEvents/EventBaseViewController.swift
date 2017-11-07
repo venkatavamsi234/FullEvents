@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate, PassingContactsAndStreamsDelegate {
+class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate {
     
     var event:EventInfo?
     
@@ -44,14 +44,6 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
         event?.eventEndDate = endDate
     }
     
-    func PassingContacts(contacts: Array<String>) {
-        event?.eventContacts = contacts
-    }
-    
-    func PassingStreams(stream: Array<String>) {
-        event?.eventStream = stream
-    }
-
 }
 
 struct EventInfo {
@@ -59,6 +51,4 @@ struct EventInfo {
     var eventDescription: String = ""
     var eventStartDate: String = ""
     var eventEndDate: String = ""
-    var eventContacts: Array<String> = []
-    var eventStream: Array<String> = []
 }

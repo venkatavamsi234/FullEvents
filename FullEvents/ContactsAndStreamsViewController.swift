@@ -9,10 +9,6 @@
 import UIKit
 import AlecrimCoreData
 
-protocol PassingContactsAndStreamsDelegate {
-    func PassingContacts(contacts: Array<String>)
-    func PassingStreams(stream: Array<String>)
-}
 
 class PeerTableViewUserCell: UITableViewCell {
     
@@ -36,9 +32,6 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var searchBarForPeers: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var eventContactsDelegate : PassingContactsAndStreamsDelegate?
-    
-    
     
     // Search label corresponds to results not found label in storyboard.
     @IBOutlet weak var searchLabel: UILabel!
@@ -46,7 +39,6 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     var searchBarText = String()
     
     var getTheUserObject = User()
-    var getTheStreamObject = UserStreams()
     
     // The context defined here corresponds to seach bar and it will be having the filtered contacts and streams.
     var filteredObjectsForUsers = Table<User>(context: container.viewContext)
@@ -280,6 +272,8 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             
             let streamCell = tableView.dequeueReusableCell(withIdentifier: "StreamCell", for: indexPath) as! PeerTableViewStreamCell
             
+            var getTheStreamObject = UserStreams()
+            
             if searchBarActive {
                 getTheStreamObject = filteredObjectsForStreams.execute()[indexPath.row]
                 
@@ -331,23 +325,14 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         tableView.reloadData()
     }
     
-    func selectingStreamIds() {
-        let streamId = getTheStreamObject.id
+    func selectingStreamIds(streamId: String) {
         if streamIds.contains(streamId) {
             if let index = streamIds.index(of: streamId) {
                 streamIds.remove(at: index)
-                userIds = userIds.filter{!(getTheStreamObject.members as [String]).contains($0)}
             }
         } else {
             streamIds.append(streamId)
-            let streamUsers = getTheStreamObject.members as [String]
-            for streamUser in streamUsers {
-                if !userIds.contains(streamUser) {
-                    userIds.append(streamUser)
-                }
-            }
         }
-        print(userIds)
         tableView.reloadData()
     }
     
@@ -359,42 +344,35 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             return
         }
         eventDetailsViewController.eventInfo = parent.event
-        if let contactsCount = parent.event?.eventContacts.count {
-            eventDetailsViewController.totolCount = contactsCount
-        }
+        eventDetailsViewController.count = userIds.count
+        eventDetailsViewController.contactAttendees = userIds
         if userIds != [] {
             navigationController?.pushViewController(eventDetailsViewController, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         searchBarForPeers.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
-        
         switch entityType {
         case .user:
-            
             if searchBarActive {
                 getTheUserObject = filteredObjectsForUsers.execute()[indexPath.row]
             }
-                
             else {
                 
                 getTheUserObject = fetchTheUsers.object(at: indexPath)
             }
             selectingContactIds()
-            eventContactsDelegate?.PassingContacts(contacts: userIds)
         case .stream:
-            
+            var getTheStreamObject = UserStreams()
             if searchBarActive {
                 getTheStreamObject = filteredObjectsForStreams.execute()[indexPath.row]
             } else {
                 getTheStreamObject = fetchTheStreams.object(at: indexPath)
             }
-            
-            selectingStreamIds()
-            eventContactsDelegate?.PassingContacts(contacts: userIds)
+            let streamId = getTheStreamObject.id
+            selectingStreamIds(streamId: streamId)
         }
     }
     
@@ -419,7 +397,33 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    func uniqueElementsFrom(array: [String]) -> [String] {
+        var set = Set<String>()
+        let result = array.filter {
+            guard !set.contains($0) else {
+                return false
+            }
+            set.insert($0)
+            return true
+        }
+        return result
+    }
+    
     @IBAction func redirectToEventDetailsVC(_ sender: UIBarButtonItem) {
+        
+        switch entityType {
+            
+        case .stream:
+            userIds.removeAll()
+            let streamObjects = StreamService.getContactObjectsUsingId(contactId: streamIds)
+            for streamObject in streamObjects {
+                userIds.append(contentsOf: streamObject.members as [String])
+            }
+            userIds = uniqueElementsFrom(array: userIds)
+            
+        default: break
+        }
+        
         redirectToEventdetailsVC()
     }
     

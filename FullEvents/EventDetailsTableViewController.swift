@@ -17,7 +17,8 @@ class EventDetailsTableViewController: UITableViewController {
     @IBOutlet weak var attendeeCount: UILabel!
     
     var eventInfo: EventInfo?
-    var totolCount = Int()
+    var count = Int()
+    var contactAttendees = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +35,18 @@ class EventDetailsTableViewController: UITableViewController {
         eventDescription.text = eventInfo?.eventDescription
         startDate.text = eventInfo?.eventStartDate
         endDate.text = eventInfo?.eventEndDate
-        attendeeCount.text = "\(totolCount)"
+        attendeeCount.text = "\(count)"
     }
+    
+    
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch (indexPath.section, indexPath.row) {
         case (0,0):
-          navigationController?.popToViewController((navigationController?.viewControllers[0])!, animated: true)
+            navigationController?.popToViewController((navigationController?.viewControllers[0])!, animated: true)
         case (0,1):
             navigationController?.popToViewController((navigationController?.viewControllers[0])!, animated: true)
         case (1,0):
@@ -51,8 +55,8 @@ class EventDetailsTableViewController: UITableViewController {
             navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
         case (2,0):
             if let contactsViewController = storyboard?.instantiateViewController(withIdentifier: "SelectedContactsTableViewController") as? SelectedContactsTableViewController {
-                if let eventContacts = eventInfo?.eventContacts, eventContacts != [] {
-                    contactsViewController.contacts = eventContacts
+                if contactAttendees != [] {
+                    contactsViewController.attendees = contactAttendees
                     navigationController?.pushViewController(contactsViewController, animated: true)
                 }
             }
@@ -62,4 +66,5 @@ class EventDetailsTableViewController: UITableViewController {
         
     }
 }
+
 

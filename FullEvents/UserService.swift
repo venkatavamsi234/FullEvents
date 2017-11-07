@@ -50,23 +50,19 @@ class UserService {
         }
         
         save()
-
+        
     }
     
-    class  func getContactUsingId(contactId: Array<String>) -> [String] {
-        var names: [String] = []
-        
+    class  func getContactObjectsUsingId(contactId: Array<String>) -> [User] {
+        var user = [User]()
         let contactName = container.viewContext.users
-        
         for contact in contactId {
-            let user = contactName.first {$0.id == contact}
-            let firstName = user?.firstName
-            if let lastName = user?.lastName {
-            let fullName = firstName! + lastName
-                names.append(fullName)
+            if let userObject = contactName.first(where: {$0.id == contact}) {
+                user.append(userObject)
             }
         }
-        return names
+        return user
     }
-
 }
+
+

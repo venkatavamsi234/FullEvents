@@ -46,15 +46,15 @@ class StreamService {
         save()
     }
     
-    class func getSelectedStream(streamId: Array<String>) -> [String] {
-        
-        var selectedStream:[String] = []
-        
-        let streamContext = container.viewContext.streams
-        let stream = streamContext.first { $0.id == streamId[0] }
-        let streamName = (stream?.name)!
-        selectedStream.append(streamName)
-        return selectedStream
+    class  func getContactObjectsUsingId(contactId: Array<String>) -> [UserStreams] {
+        var user = [UserStreams]()
+        let contactName = container.viewContext.streams
+        for contact in contactId {
+            if let userObject = contactName.first(where: {$0.id == contact}) {
+                user.append(userObject)
+            }
+        }
+        return user
     }
     
 }

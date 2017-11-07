@@ -10,23 +10,29 @@ import UIKit
 
 class SelectedContactsTableViewController: UITableViewController {
     
-    var contacts = [String]()
+    var attendees = [String]()
     var attendeeNames = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-         attendeeNames = UserService.getContactUsingId(contactId: contacts)
+        let attendeeObjects = UserService.getContactObjectsUsingId(contactId: attendees)
+        for attendeeObject in attendeeObjects {
+           let firstName = attendeeObject.firstName
+           let lastName = attendeeObject.lastName
+            let fullName = firstName + lastName
+            attendeeNames.append(fullName)
+        }
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        title =    "Selected contacts"
+        title = "Selected contacts"
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
     }
     // MARK: - Table view data source
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -38,7 +44,7 @@ class SelectedContactsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventName", for: indexPath)
-        cell.textLabel?.text = attendeeNames[indexPath.row]
+            cell.textLabel?.text = attendeeNames[indexPath.row]
         return cell
     }
     
