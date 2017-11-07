@@ -25,6 +25,7 @@ class DatepickerAndTimeViewController: UIViewController {
         super.viewDidLoad()
         datepicker.minimumDate = minimumDate
         datepicker.date = selectedDate ?? Date()
+        datepicker.minuteInterval = 5
     }
     
     @IBAction func hideDatePicker(_ sender: UIButton) {

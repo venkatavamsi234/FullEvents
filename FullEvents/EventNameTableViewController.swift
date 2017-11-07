@@ -30,6 +30,9 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
     
     override func viewWillAppear(_ animated: Bool) {
         eventName.delegate = self
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
     }
     
     func hideKeyboard() {
@@ -60,8 +63,8 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
         if let parent = navigationController?.parent as? EventBaseViewController {
             eventDateViewController.eventDateDelegate = parent
         }
-        
         navigationController?.pushViewController(eventDateViewController, animated: true)
+    
     }
     
     

@@ -81,12 +81,20 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         super.viewDidLoad()
         searchBarForPeers.setShowsCancelButton(false, animated: false)
         searchBarForPeers.delegate = self
+        searchBarForPeers.placeholder = "Search Attendees"
         tableView.delegate = self
         self.getDataFromDisc()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        title = "Attendee"
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "Attende"
         searchLabel.isHidden = true
         self.tableView.reloadData()
     }
@@ -310,7 +318,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         cell.profilePic.layer.borderWidth = 1
     }
     
-    func selectingContacts() {
+    func selectingContactIds() {
         let userId = getTheUserObject.id
         
         if userIds.contains(userId) {
@@ -323,20 +331,40 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         tableView.reloadData()
     }
     
-    func selectingStreams() {
+    func selectingStreamIds() {
         let streamId = getTheStreamObject.id
-        
         if streamIds.contains(streamId) {
             if let index = streamIds.index(of: streamId) {
                 streamIds.remove(at: index)
+                userIds = userIds.filter{!(getTheStreamObject.members as [String]).contains($0)}
             }
         } else {
             streamIds.append(streamId)
-            if streamIds.count > 1 {
-                streamIds.removeFirst(streamIds.count - 1)
+            let streamUsers = getTheStreamObject.members as [String]
+            for streamUser in streamUsers {
+                if !userIds.contains(streamUser) {
+                    userIds.append(streamUser)
+                }
             }
         }
+        print(userIds)
         tableView.reloadData()
+    }
+    
+    func redirectToEventdetailsVC() {
+        guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
+            return
+        }
+        guard let parent = navigationController?.parent as? EventBaseViewController else {
+            return
+        }
+        eventDetailsViewController.eventInfo = parent.event
+        if let contactsCount = parent.event?.eventContacts.count {
+            eventDetailsViewController.totolCount = contactsCount
+        }
+        if userIds != [] {
+            navigationController?.pushViewController(eventDetailsViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -355,8 +383,8 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
                 
                 getTheUserObject = fetchTheUsers.object(at: indexPath)
             }
-            selectingContacts()
-            
+            selectingContactIds()
+            eventContactsDelegate?.PassingContacts(contacts: userIds)
         case .stream:
             
             if searchBarActive {
@@ -364,21 +392,9 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             } else {
                 getTheStreamObject = fetchTheStreams.object(at: indexPath)
             }
-            selectingStreams()
-            if streamIds != [] {
-                let contactNames = UserService.getContactUsingId(contactId: userIds)
-                eventContactsDelegate?.PassingContacts(contacts: contactNames)
-                let selectedStream = StreamService.getSelectedStream(streamId: streamIds)
-                eventContactsDelegate?.PassingStreams(stream: selectedStream)
-                guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
-                    return
-                }
-                guard let parent = navigationController?.parent as? EventBaseViewController else {
-                    return
-                }
-                eventDetailsViewController.eventInfo = parent.event
-                navigationController?.pushViewController(eventDetailsViewController, animated: true)
-            }
+            
+            selectingStreamIds()
+            eventContactsDelegate?.PassingContacts(contacts: userIds)
         }
     }
     
@@ -390,12 +406,21 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            searchBarForPeers.placeholder = "Search Attendees"
             entityType = .user
             getDataFromDisc()
+            streamIds.removeAll()
+            userIds.removeAll()
         } else {
             entityType = .stream
+            searchBarForPeers.placeholder = "Search streams"
             getDataFromDisc()
+            userIds.removeAll()
         }
     }
-
+    
+    @IBAction func redirectToEventDetailsVC(_ sender: UIBarButtonItem) {
+        redirectToEventdetailsVC()
+    }
+    
 }

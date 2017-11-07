@@ -38,6 +38,9 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         title = "Event Date"
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
     }
     
     
@@ -46,11 +49,9 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
         guard let datePickerViewController = storyboard?.instantiateViewController(withIdentifier: "DatepickerAndTimeViewController") as? DatepickerAndTimeViewController else {
             return
         }
-        
         datePickerViewController.modalPresentationStyle = .overCurrentContext
-        
         datePickerViewController.delegate = self
-        datePickerViewController.minimumDate = chosedStartDate ?? Date()
+        datePickerViewController.minimumDate =  chosedStartDate ?? Date()
         datePickerViewController.selectedDate = (dateMode == .startDate) ? chosedStartDate : chosedEndDate
         self.present(datePickerViewController, animated: true, completion: nil)
     }
@@ -67,7 +68,7 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     
     func dateConversionToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM-dd-yyyy hh:mm a"
+        dateFormatter.dateFormat = "dd-MMM-yyyy hh:mm a"
         return dateFormatter.string(from: date)
         
     }
@@ -76,7 +77,6 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     func passData(choosenDate: Date) {
         dateString = dateConversionToString(date: choosenDate)
         switch dateMode {
-            
         case .startDate:
             if  let selectedEndDate = chosedEndDate {
                 if choosenDate < selectedEndDate {
@@ -93,32 +93,28 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
             }
             
         case .endDate:
-            
-            guard let selectedStartDate = chosedStartDate else { return }
-            
-            let differenceOfDates = Calendar.current.dateComponents([.minute], from: selectedStartDate, to: choosenDate)
-            
-            if differenceOfDates.minute ?? 0 >= 5 {
-                chosedEndDate = choosenDate
-                endDateLabel.setTitle(dateString, for: .normal)
+            if let startDate = chosedStartDate {
+                print(startDate)
+            if choosenDate > startDate {
+                print(choosenDate)
+            chosedEndDate = choosenDate
+            endDateLabel.setTitle(dateString, for: .normal)
             } else {
-                let alert = UIAlertController(title: "", message: "End date should be atleast 5 mins greater than start date", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
-                self.present(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "", message: "End date should be greater than start date", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
-            
         }
     }
     
     @IBAction func endDate(_ sender: UIButton) {
-        
         guard chosedStartDate != nil else {
             let alert = UIAlertController(title: "", message: "Start date is required", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
         dateMode = .endDate
         presentDatePicker()
     }
