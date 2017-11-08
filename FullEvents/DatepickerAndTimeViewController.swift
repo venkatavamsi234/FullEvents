@@ -24,7 +24,8 @@ class DatepickerAndTimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         datepicker.minimumDate = minimumDate
-        datepicker.date = selectedDate ?? Date()
+        datepicker.date = selectedDate ?? minimumDate ?? Date()
+        
         datepicker.minuteInterval = 5
     }
     

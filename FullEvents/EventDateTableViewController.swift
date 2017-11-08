@@ -20,6 +20,7 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     @IBOutlet weak var endDateLabel: UIButton!
     
     var eventDateDelegate: PassingDatesDelegate?
+    var eventDates: EventInfo?
     
     enum DateMode: String {
         case startDate
@@ -30,10 +31,15 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     var datePickerViewController:DatepickerAndTimeViewController?
     var chosedStartDate: Date?, chosedEndDate: Date?
     var dateString = String()
+    var AddingMinToCurrentDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+//        if let eventStartDate = eventDates?.eventStartDate, !eventStartDate.isEmpty {
+//            chooseDateLabel.setTitle(eventStartDate, for: .normal)
+//            chosedStartDate = date
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +57,13 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
         }
         datePickerViewController.modalPresentationStyle = .overCurrentContext
         datePickerViewController.delegate = self
-        datePickerViewController.minimumDate =  chosedStartDate ?? Date()
+        let minutes = Calendar.current.component(.minute, from: Date())
+        let remainder = minutes%5
+        if remainder != 0 {
+            let timeToAdd = 5 - remainder
+            AddingMinToCurrentDate = Date().addingTimeInterval(TimeInterval(timeToAdd * 60))
+        }
+        datePickerViewController.minimumDate =  chosedStartDate ?? (AddingMinToCurrentDate ?? Date())
         datePickerViewController.selectedDate = (dateMode == .startDate) ? chosedStartDate : chosedEndDate
         self.present(datePickerViewController, animated: true, completion: nil)
     }
@@ -94,13 +106,11 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
             
         case .endDate:
             if let startDate = chosedStartDate {
-                print(startDate)
-            if choosenDate > startDate {
-                print(choosenDate)
-            chosedEndDate = choosenDate
-            endDateLabel.setTitle(dateString, for: .normal)
-            } else {
-                let alert = UIAlertController(title: "", message: "End date should be greater than start date", preferredStyle: UIAlertControllerStyle.alert)
+                if choosenDate > startDate {
+                    chosedEndDate = choosenDate
+                    endDateLabel.setTitle(dateString, for: .normal)
+                } else {
+                    let alert = UIAlertController(title: "", message: "End date should be greater than start date", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))
                     self.present(alert, animated: true, completion: nil)
                 }
