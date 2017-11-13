@@ -8,7 +8,10 @@
 
 import UIKit
 import AlecrimCoreData
-
+protocol PassingIdsDelegate {
+    func passUserIds(userIds: Array<String>)
+    func passStreamIds(streamIds: Array<String>)
+}
 
 class PeerTableViewUserCell: UITableViewCell {
     
@@ -37,6 +40,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var searchLabel: UILabel!
     var searchBarActive = false
     var searchBarText = String()
+    var eventIdsDelegate: PassingIdsDelegate?
     
     var getTheUserObject = User()
     
@@ -49,6 +53,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     var entityType: ConvType = .user
     var userIds:[String] = []
     var streamIds:[String] = []
+    var event: EventInfo?
     
     lazy var fetchTheUsers : FetchRequestController<User> = {
         let predicate:NSPredicate = NSPredicate(format: "status == %@","ACTIVE")
@@ -76,6 +81,14 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
         searchBarForPeers.placeholder = "Search Attendees"
         tableView.delegate = self
         self.getDataFromDisc()
+        if let strId = event?.eventStreamIds, let usrId = event?.eventContactIds, strId != [] {
+            streamIds = strId
+            userIds = usrId
+        } else {
+            if let usrId = event?.eventContactIds, usrId != [] {
+                userIds = usrId
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -383,6 +396,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     }
     
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+        
         if sender.selectedSegmentIndex == 0 {
             searchBarForPeers.placeholder = "Search Attendees"
             entityType = .user
@@ -395,9 +409,11 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             getDataFromDisc()
             userIds.removeAll()
         }
+        
     }
     
     func uniqueElementsFrom(array: [String]) -> [String] {
+        
         var set = Set<String>()
         let result = array.filter {
             guard !set.contains($0) else {
@@ -407,11 +423,15 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
             return true
         }
         return result
+        
     }
     
     @IBAction func redirectToEventDetailsVC(_ sender: UIBarButtonItem) {
         
         switch entityType {
+            
+        case .user:
+            eventIdsDelegate?.passUserIds(userIds: userIds)
             
         case .stream:
             userIds.removeAll()
@@ -420,8 +440,8 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
                 userIds.append(contentsOf: streamObject.members as [String])
             }
             userIds = uniqueElementsFrom(array: userIds)
-            
-        default: break
+            eventIdsDelegate?.passUserIds(userIds: userIds)
+            eventIdsDelegate?.passStreamIds(streamIds: streamIds)
         }
         
         redirectToEventdetailsVC()

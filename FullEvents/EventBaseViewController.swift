@@ -8,14 +8,14 @@
 
 import UIKit
 
-class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate {
+class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate, PassingIdsDelegate {
     
     var event:EventInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         event = EventInfo()
-        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -33,15 +33,29 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
     
     
     func PassingEventNameAndEventDescription(eventName: String, eventDescription: String?) {
-      event?.eventName = eventName
+        event?.eventName = eventName
         if let eventDesc = eventDescription {
             event?.eventDescription = eventDesc
         }
     }
     
-    func passingDates(startDate: String, endDate: String) {
-       event?.eventStartDate = startDate
+    func passingDates(startDate: Date, endDate: Date) {
+        event?.eventStartDate = startDate
         event?.eventEndDate = endDate
+        
+        let dateComponents = Calendar.current.dateComponents([.minute], from: startDate, to: endDate)
+        if let duration = dateComponents.minute {
+            event?.eventDuration = duration
+        }
+        
+    }
+    
+    func passUserIds(userIds: Array<String>) {
+        event?.eventContactIds = userIds
+    }
+    
+    func passStreamIds(streamIds: Array<String>) {
+        event?.eventStreamIds = streamIds
     }
     
 }
@@ -49,6 +63,9 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
 struct EventInfo {
     var eventName: String = ""
     var eventDescription: String = ""
-    var eventStartDate: String = ""
-    var eventEndDate: String = ""
+    var eventStartDate: Date?
+    var eventEndDate: Date?
+    var eventContactIds:[String] = []
+    var eventStreamIds:[String] = []
+    var eventDuration:Int = 0
 }
