@@ -84,7 +84,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         //   converting longmilli sec to date object
         let date = Date(timeIntervalSince1970: (Double((getTheEvent.startDate)) / 1000.0))
         let startDateString = dateConversionToString(date: date)
-        cell.eventName.text = getTheEvent.eventName
+        cell.eventName.text = getTheEvent.eventName.capitalized
         cell.eventDescription.text = getTheEvent.eventDescrip
         cell.eventStartTime.text = startDateString
         let duration = getTheEvent.duration
@@ -118,10 +118,11 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 25))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.eventsTableView.frame.width, height: self.eventsTableView.sectionHeaderHeight))
         self.view.addSubview(view)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 25))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.eventsTableView.frame.width, height: self.eventsTableView.sectionHeaderHeight))
         label.textAlignment = .center
+        
         view.addSubview(label)
         let sectionInfo = fetchTheEvents.sections[section]
         label.text = sectionInfo.name
@@ -130,7 +131,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        return self.eventsTableView.sectionHeaderHeight
     }
     
     

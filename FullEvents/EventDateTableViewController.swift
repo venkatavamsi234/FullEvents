@@ -9,15 +9,17 @@
 import UIKit
 
 protocol PassingDatesDelegate {
-    func passingDates(startDate: String, endDate: String)
+    func passingDates(startDate: Date , endDate: Date)
+    func passTime(time: Int)
 }
 
-class EventDateTableViewController: UITableViewController, DatePassingDelegate {
+class EventDateTableViewController: UITableViewController, DatePassingDelegate, SendingTimeDelegate {
     
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var chooseDateLabel: UIButton!
     @IBOutlet weak var endDateLabel: UIButton!
+    @IBOutlet weak var eventReminder: UIButton!
     
     var eventDateDelegate: PassingDatesDelegate?
     var eventDates: EventInfo?
@@ -36,10 +38,22 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-//        if let eventStartDate = eventDates?.eventStartDate, !eventStartDate.isEmpty {
-//            chooseDateLabel.setTitle(eventStartDate, for: .normal)
-//            chosedStartDate = date
-//        }
+        if let eventStartDate = eventDates?.eventStartDate {
+          let startDate = dateConversionToString(date: eventStartDate)
+            chooseDateLabel.setTitle(startDate, for: .normal)
+            chosedStartDate = eventStartDate
+        }
+        
+        if let eventEndDate = eventDates?.eventEndDate {
+            let endDate = dateConversionToString(date: eventEndDate)
+            endDateLabel.setTitle(endDate, for: .normal)
+            chosedEndDate = eventEndDate
+        }
+        
+        if let time = eventDates?.eventReminderTime {
+            eventReminder.setTitle(("\(time)" + " mins"), for: .normal)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,15 +143,41 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
         presentDatePicker()
     }
     
+ 
+    func sendTime(time: Int) {
+       let timeString = "\(time)" + " mins"
+        eventReminder.setTitle(timeString, for: .normal)
+        eventDates?.eventReminderTime = time
+        print(time)
+       eventDateDelegate?.passTime(time:time)
+    
+    }
+    
+    @IBAction func presentRemainderTableViewController(_ sender: UIButton) {
+        
+        guard let eventRemainderVC = storyboard?.instantiateViewController(withIdentifier: "EventRemainderTableViewController") as? EventRemainderTableViewController else {
+            return
+        }
+        
+        eventRemainderVC.eventReminder = self
+        if let reminderTime = eventDates?.eventReminderTime {
+            eventRemainderVC.selectedTime = reminderTime
+        }
+        let navController = UINavigationController(rootViewController: eventRemainderVC)
+        self.present(navController, animated:true, completion: nil)
+    }
+
     @IBAction func redirectingToContactsAndStreamsVC(_ sender: UIBarButtonItem) {
         
         if (chosedStartDate != nil) && chosedEndDate != nil {
-            let startDateString = dateConversionToString(date: chosedStartDate!),  endDateString = dateConversionToString(date: chosedEndDate!)
-            eventDateDelegate?.passingDates(startDate: startDateString , endDate: endDateString)
+            eventDateDelegate?.passingDates(startDate: chosedStartDate! , endDate: chosedEndDate!)
             guard let contactsAndStreamsViewController = storyboard?.instantiateViewController(withIdentifier: "ContactsAndStreamsViewController") as? ContactsAndStreamsViewController else {
                 return
             }
-            
+            if let parent = navigationController?.parent as? EventBaseViewController {
+                contactsAndStreamsViewController.eventIdsDelegate = parent
+                contactsAndStreamsViewController.event = parent.event
+            }
             navigationController?.pushViewController(contactsAndStreamsViewController, animated: true)
             
             
@@ -148,5 +188,6 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate {
             
         }
     }
+    
     
 }

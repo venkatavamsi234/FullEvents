@@ -50,6 +50,10 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
         
     }
     
+    func passTime(time: Int) {
+        event?.eventReminderTime = time
+    }
+    
     func passUserIds(userIds: Array<String>) {
         event?.eventContactIds = userIds
     }
@@ -68,4 +72,5 @@ struct EventInfo {
     var eventContactIds:[String] = []
     var eventStreamIds:[String] = []
     var eventDuration:Int = 0
+    var eventReminderTime: Int?
 }
