@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EventDetailsVCDelegate {
+    func clickOnBackButton()
+}
+
 class EventDetailsTableViewController: UITableViewController {
     
     @IBOutlet weak var eventName: UILabel!
@@ -16,19 +20,31 @@ class EventDetailsTableViewController: UITableViewController {
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var attendeeCount: UILabel!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    @IBOutlet weak var reminderTime: UILabel!
+    @IBOutlet weak var leftBarbutton: UIBarButtonItem!
     
     var eventInfo: EventInfo?
-    var count = Int()
     var contactAttendees = [String]()
+    var typeOfFlow:flowType?
+    var popVCDelegate: EventDetailsVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if typeOfFlow == .create {
         rightBarButton.title = "Create"
+        leftBarbutton.title = nil
+        } else {
+            rightBarButton.title = "Save"
+            leftBarbutton.title = "Back"
+        }
         tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         title = "Event Details"
+        
+        self.navigationController?.navigationItem.title = "Event Details"
+        
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
@@ -46,7 +62,13 @@ class EventDetailsTableViewController: UITableViewController {
             endDate.text = eventEndDate
         }
         
-        attendeeCount.text = "\(count)"
+        reminderTime.text = "\(eventInfo?.eventReminderTime ?? 0)" + " minutes"
+        
+        attendeeCount.text = "\(eventInfo?.attendeeCount ?? 0)"
+        
+        if let attendees = eventInfo?.eventContactIds {
+            contactAttendees = attendees
+        }
     }
     
     func dateConversionToString(date: Date) -> String {
@@ -65,32 +87,48 @@ class EventDetailsTableViewController: UITableViewController {
     }
     
     func redirectToSelectedViewController(action: UIAlertAction) {
-        if let contactsViewController = storyboard?.instantiateViewController(withIdentifier: "SelectedContactsTableViewController") as? SelectedContactsTableViewController {
+        guard let contactsViewController = storyboard?.instantiateViewController(withIdentifier: "SelectedContactsTableViewController") as? SelectedContactsTableViewController else {
+            return
+        }
             if contactAttendees != [] {
                 contactsViewController.attendees = contactAttendees
                 navigationController?.pushViewController(contactsViewController, animated: true)
             }
-        }
     }
     
     func redirectToContactsAndStreamsViewController(action: UIAlertAction) {
-        navigationController?.popToViewController((navigationController?.viewControllers[2])!, animated: true)
+        guard let eventContactsVC = storyboard?.instantiateViewController(withIdentifier: "ContactsAndStreamsViewController") as? ContactsAndStreamsViewController else {
+            return
+        }
+        eventContactsVC.event = eventInfo
+        eventContactsVC.typeOfFlow = typeOfFlow
+        navigationController?.pushViewController(eventContactsVC, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch (indexPath.section, indexPath.row) {
-        // (0,0) corresponds to event name, (0,1) corresponds to event description, (1,0) corresponds to start date, (1,1) corresponds to end date.
-        case (0,0):
-            navigationController?.popToViewController((navigationController?.viewControllers[0])!, animated: true)
-        case (0,1):
-            navigationController?.popToViewController((navigationController?.viewControllers[0])!, animated: true)
-        case (1,0):
-            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
-        case (1,1):
-            navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
-        case (2,0):
+    
+        switch (indexPath.section) {
+            
+        case (0):
+            guard let eventNameVC = storyboard?.instantiateViewController(withIdentifier: "EventNameTableViewController") as? EventNameTableViewController else {
+                return
+            }
+            eventNameVC.eventInfo = eventInfo
+            eventNameVC.typeOfFlow = typeOfFlow
+            navigationController?.pushViewController(eventNameVC, animated: true)
+            
+            
+        case (1):
+            guard let eventDateVC = storyboard?.instantiateViewController(withIdentifier: "EventDateTableViewController") as? EventDateTableViewController else {
+                return
+            }
+            eventDateVC.eventInfo = eventInfo
+            eventDateVC.typeOfFlow = typeOfFlow
+            navigationController?.pushViewController(eventDateVC, animated: true)
+            
+        case (2):
             
             let alert = UIAlertController(title: "", message: "Choose the preferred one", preferredStyle: UIAlertControllerStyle.actionSheet)
             alert.addAction(UIAlertAction(title: "View", style: UIAlertActionStyle.default, handler: redirectToSelectedViewController))
@@ -102,6 +140,13 @@ class EventDetailsTableViewController: UITableViewController {
             break
         }
     }
+    
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+     popVCDelegate?.clickOnBackButton()
+    }
+    
+    
+    
     
     @IBAction func createEvent(_ sender: UIBarButtonItem) {
         
@@ -115,8 +160,12 @@ class EventDetailsTableViewController: UITableViewController {
         
         let eventStartday = dateObjectConversionToDay(date: eventday)
         
+        if typeOfFlow == .create {
         EventService.saveDetails(eventDetails: eventData, day: eventStartday)
-        
+            typeOfFlow = .edit
+        } else {
+            
+        }
         self.dismiss(animated: true, completion: nil)
         
     }

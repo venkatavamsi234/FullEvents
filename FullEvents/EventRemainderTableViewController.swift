@@ -41,22 +41,7 @@ class EventRemainderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        switch indexPath.row {
-        case 0:
-            eventReminder?.sendTime(time: remainderTime[0])
-        case 1:
-            eventReminder?.sendTime(time: remainderTime[1])
-        case 2:
-            eventReminder?.sendTime(time: remainderTime[2])
-        case 3:
-            eventReminder?.sendTime(time: remainderTime[3])
-        case 4:
-            eventReminder?.sendTime(time: remainderTime[4])
-        case 5:
-            eventReminder?.sendTime(time: remainderTime[5])
-        default:
-            break
-        }
+        eventReminder?.sendTime(time: remainderTime[indexPath.row])
         self.dismiss(animated: true, completion: nil)
     }
 

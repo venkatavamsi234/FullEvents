@@ -20,10 +20,14 @@ class EventsTableViewCell: UITableViewCell {
     
 }
 
+enum flowType {
+    case create
+    case edit
+}
+
 class DashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var eventsTableView: UITableView!
-    var getTheEvent = Event()
     
     lazy var fetchTheEvents: FetchRequestController<Event> = {
         let sortDescriptorsForEvents = NSSortDescriptor(key: "startDate", ascending: true)
@@ -44,7 +48,16 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         navigationController?.navigationBar.topItem?.title = "Events"
         eventsTableView.tableFooterView = UIView()
     }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        navigationController?.setNavigationBarHidden(false, animated: false)
+//
+//    }
     
+//    override func viewDidDisappear(_ animated: Bool) {
+//        navigationController?.setNavigationBarHidden(true, animated: false)
+//    }
+//    
     func getDataFromDisc() {
         do {
             try fetchTheEvents.performFetch()
@@ -59,6 +72,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let eventBaseViewController = storyboard?.instantiateViewController(withIdentifier: "EventBaseViewController") as? EventBaseViewController else {
             return
         }
+        
+        eventBaseViewController.typeOfFlow = .create
         self.navigationController?.present(eventBaseViewController, animated: true, completion: nil)
         
     }
@@ -79,7 +94,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let cell = eventsTableView.dequeueReusableCell(withIdentifier: "Event", for: indexPath) as! EventsTableViewCell
         
-        getTheEvent = fetchTheEvents.object(at: indexPath)
+        let getTheEvent = fetchTheEvents.object(at: indexPath)
         
         //   converting longmilli sec to date object
         let date = Date(timeIntervalSince1970: (Double((getTheEvent.startDate)) / 1000.0))
@@ -99,15 +114,20 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         
         cell.view.layer.cornerRadius = 5
         cell.view.clipsToBounds = true
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         eventsTableView.deselectRow(at: indexPath, animated: true)
-        guard let eventDetailsVC = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else{
+        let getTheEvent = fetchTheEvents.object(at: indexPath)
+        
+        guard let eventBaseVC = storyboard?.instantiateViewController(withIdentifier: "EventBaseViewController") as? EventBaseViewController else{
             return
         }
-        navigationController?.pushViewController(eventDetailsVC, animated: true)
+        
+        eventBaseVC.eventObject = getTheEvent
+        navigationController?.pushViewController(eventBaseVC, animated: true)
     }
     
     //   converting date to date string

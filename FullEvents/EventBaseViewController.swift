@@ -8,26 +8,56 @@
 
 import UIKit
 
-class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate, PassingIdsDelegate {
+class EventBaseViewController: UIViewController, PassingEventNameAndEventDescriptionDelegate, PassingDatesDelegate, PassingIdsDelegate, EventDetailsVCDelegate{
     
-    var event:EventInfo?
+    var event: EventInfo? = EventInfo()
+    var navVC: UINavigationController?
+    var eventObject: Event?
+    var typeOfFlow: flowType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        event = EventInfo()
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "NavController" {
+            
             guard let navVC = segue.destination as? UINavigationController else {
                 return
             }
             
-            guard let evenNameVC = navVC.viewControllers[0] as? EventNameTableViewController else {
-                return
+            if typeOfFlow == .create {
+                guard let eventNameView = storyboard?.instantiateViewController(withIdentifier: "EventNameTableViewController") as? EventNameTableViewController else {
+                    return
+                }
+                
+                eventNameView.eventNameDelegate = self
+                eventNameView.typeOfFlow = .create
+                navVC.setViewControllers([eventNameView], animated: true)
+                
+            } else {
+                
+                guard let eventDetails = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
+                    return
+                }
+                if let name = eventObject?.eventName, let startDate = eventObject?.startDate, let endDate = eventObject?.endDate, let attendeesCount = eventObject?.userIds.count, let reminderTime = eventObject?.remindBefore, let attendees = eventObject?.userIds, let streams = eventObject?.streamIds {
+                    event?.eventName = name
+                    let startDate = Date(timeIntervalSince1970: (Double((startDate)) / 1000.0))
+                    let endDate = Date(timeIntervalSince1970: (Double((endDate)) / 1000.0))
+                    event?.eventStartDate = startDate
+                    event?.eventEndDate = endDate
+                    event?.attendeeCount = attendeesCount
+                    event?.eventReminderTime = Int(reminderTime)
+                    event?.eventContactIds = attendees
+                    event?.eventStreamIds = streams
+                }
+                eventDetails.eventInfo = event
+                eventDetails.typeOfFlow = .edit
+                navVC.setViewControllers([eventDetails], animated: true)
+                eventDetails.popVCDelegate = self
             }
-            evenNameVC.eventNameDelegate = self
         }
     }
     
@@ -56,10 +86,15 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
     
     func passUserIds(userIds: Array<String>) {
         event?.eventContactIds = userIds
+        event?.attendeeCount = userIds.count
     }
     
     func passStreamIds(streamIds: Array<String>) {
         event?.eventStreamIds = streamIds
+    }
+    
+    func clickOnBackButton() {
+       navigationController?.popToRootViewController(animated: true)
     }
     
 }
@@ -73,4 +108,5 @@ struct EventInfo {
     var eventStreamIds:[String] = []
     var eventDuration:Int = 0
     var eventReminderTime: Int?
+    var attendeeCount:Int = 0
 }

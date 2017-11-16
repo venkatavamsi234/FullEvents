@@ -54,6 +54,7 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     var userIds:[String] = []
     var streamIds:[String] = []
     var event: EventInfo?
+    var typeOfFlow: flowType?
     
     lazy var fetchTheUsers : FetchRequestController<User> = {
         let predicate:NSPredicate = NSPredicate(format: "status == %@","ACTIVE")
@@ -74,16 +75,14 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     }()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         searchBarForPeers.setShowsCancelButton(false, animated: false)
         searchBarForPeers.delegate = self
         searchBarForPeers.placeholder = "Search Attendees"
         tableView.delegate = self
         self.getDataFromDisc()
-        if let strId = event?.eventStreamIds, let usrId = event?.eventContactIds, strId != [] {
+        if let strId = event?.eventStreamIds, strId != [] {
             streamIds = strId
-            userIds = usrId
         } else {
             if let usrId = event?.eventContactIds, usrId != [] {
                 userIds = usrId
@@ -350,18 +349,20 @@ class ContactsAndStreamsViewController: UIViewController, UITableViewDataSource,
     }
     
     func redirectToEventdetailsVC() {
-        guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
-            return
-        }
-        guard let parent = navigationController?.parent as? EventBaseViewController else {
-            return
-        }
-        eventDetailsViewController.eventInfo = parent.event
-        eventDetailsViewController.count = userIds.count
-        eventDetailsViewController.contactAttendees = userIds
-        if userIds != [] {
-            navigationController?.pushViewController(eventDetailsViewController, animated: true)
-        }
+
+            guard let eventDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
+                return
+            }
+       
+            guard let parent = navigationController?.parent as? EventBaseViewController else {
+                return
+            }
+            eventDetailsViewController.eventInfo = parent.event
+            eventDetailsViewController.contactAttendees = userIds
+            if userIds != [] {
+                eventDetailsViewController.typeOfFlow = typeOfFlow
+                navigationController?.setViewControllers([eventDetailsViewController], animated: true)
+            }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

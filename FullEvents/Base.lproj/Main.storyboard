@@ -294,7 +294,7 @@
             </objects>
             <point key="canvasLocation" x="7767" y="-388"/>
         </scene>
-        <!--Title-->
+        <!--Event Details-->
         <scene sceneID="4WT-V5-byu">
             <objects>
                 <tableViewController storyboardIdentifier="EventDetailsTableViewController" id="vJA-J1-zjj" customClass="EventDetailsTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
@@ -455,12 +455,48 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="3my-oh-KUY">
+                                        <rect key="frame" x="0.0" y="257" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3my-oh-KUY" id="8Qn-Ms-zsI">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDN-nj-uKh">
+                                                    <rect key="frame" x="10" y="0.0" width="140" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="a6J-GS-s4J"/>
+                                                        <constraint firstAttribute="height" constant="50" id="oKH-G9-pfb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XP-wi-iLU">
+                                                    <rect key="frame" x="140" y="0.0" width="192" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Xac-Ca-Akv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nDN-nj-uKh" firstAttribute="leading" secondItem="8Qn-Ms-zsI" secondAttribute="leading" constant="10" id="1i1-Ge-dRq"/>
+                                                <constraint firstAttribute="bottom" secondItem="8XP-wi-iLU" secondAttribute="bottom" id="DAV-NI-W0f"/>
+                                                <constraint firstAttribute="bottom" secondItem="nDN-nj-uKh" secondAttribute="bottom" id="JeL-f1-LhS"/>
+                                                <constraint firstAttribute="trailing" secondItem="8XP-wi-iLU" secondAttribute="trailing" constant="10" id="RoB-pf-uTW"/>
+                                                <constraint firstItem="8XP-wi-iLU" firstAttribute="leading" secondItem="8Qn-Ms-zsI" secondAttribute="leading" constant="140" id="aOo-qK-OeP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="                     " id="3zp-bq-D46">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="Izb-K5-tCJ">
-                                        <rect key="frame" x="0.0" y="285" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="335" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Izb-K5-tCJ" id="2zH-Ba-tWS">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
@@ -504,8 +540,13 @@
                             <outlet property="delegate" destination="vJA-J1-zjj" id="Uil-GG-i6l"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="Hni-en-HBj">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="xDq-Ba-c7g" userLabel="Create">
+                    <navigationItem key="navigationItem" title="Event Details" id="Hni-en-HBj">
+                        <barButtonItem key="leftBarButtonItem" id="8KW-PQ-2UU">
+                            <connections>
+                                <action selector="backButton:" destination="vJA-J1-zjj" id="kVZ-L6-tKM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="xDq-Ba-c7g" userLabel="Create">
                             <connections>
                                 <action selector="createEvent:" destination="vJA-J1-zjj" id="AyU-9F-ccF"/>
                             </connections>
@@ -516,6 +557,8 @@
                         <outlet property="endDate" destination="Xlh-DE-cte" id="LgZ-HP-n1p"/>
                         <outlet property="eventDescription" destination="Clk-kT-HTr" id="8jR-Oq-Wmw"/>
                         <outlet property="eventName" destination="D4K-MQ-YjI" id="AsI-8u-50a"/>
+                        <outlet property="leftBarbutton" destination="8KW-PQ-2UU" id="y8l-Kz-sej"/>
+                        <outlet property="reminderTime" destination="8XP-wi-iLU" id="BQE-iS-Ilw"/>
                         <outlet property="rightBarButton" destination="xDq-Ba-c7g" id="nNd-PN-WrR"/>
                         <outlet property="startDate" destination="fyr-Pm-RUb" id="fh1-L1-FYl"/>
                     </connections>
@@ -737,7 +780,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EventsTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Event" rowHeight="70" id="Zhw-rG-O4s" customClass="EventsTableViewCell" customModule="FullEvents" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zhw-rG-O4s" id="Ra5-Ps-yEO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -885,12 +928,13 @@
         <!--Events-->
         <scene sceneID="xGA-bC-tvN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zi5-6s-XEi" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Zi5-6s-XEi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" image="Dashboard" id="NyK-a4-2dA"/>
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="adJ-V5-zfr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="adJ-V5-zfr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1111,7 +1155,7 @@
         <!--Event Base View Controller-->
         <scene sceneID="x9d-7x-z2s">
             <objects>
-                <viewController storyboardIdentifier="EventBaseViewController" id="MdC-fx-KUC" customClass="EventBaseViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventBaseViewController" hidesBottomBarWhenPushed="YES" id="MdC-fx-KUC" customClass="EventBaseViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n0f-AN-zHA"/>
                         <viewControllerLayoutGuide type="bottom" id="JMa-6c-hb5"/>
@@ -1145,7 +1189,7 @@
         <scene sceneID="a4I-L6-xOK">
             <objects>
                 <navigationController id="JL8-lM-xf1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uxx-DC-Any">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Uxx-DC-Any">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1158,12 +1202,12 @@
             </objects>
             <point key="canvasLocation" x="5470" y="-388"/>
         </scene>
-        <!--New Event-->
+        <!--Event Info-->
         <scene sceneID="8Tf-2s-6cv">
             <objects>
                 <tableViewController storyboardIdentifier="EventNameTableViewController" id="mGJ-sn-mFG" customClass="EventNameTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="3vh-bH-Uka">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -1264,10 +1308,10 @@
                             <outlet property="delegate" destination="mGJ-sn-mFG" id="eps-R6-Jen"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Event" id="Zwm-Qd-etA">
-                        <barButtonItem key="leftBarButtonItem" image="Cancel" id="cAT-ZY-dNF">
+                    <navigationItem key="navigationItem" title="Event Info" id="Zwm-Qd-etA">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="cAT-ZY-dNF">
                             <connections>
-                                <action selector="dismissEventNamePage:" destination="mGJ-sn-mFG" id="OAl-iA-WyC"/>
+                                <action selector="dismissEventNamePage:" destination="mGJ-sn-mFG" id="SwC-YS-2bu"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="n8h-NZ-a8z">
@@ -1277,6 +1321,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="cAT-ZY-dNF" id="8gb-g5-H6u"/>
                         <outlet property="eventDescription" destination="axR-JP-gX8" id="sKq-m2-eht"/>
                         <outlet property="eventName" destination="jxN-g1-6yb" id="ybR-q2-nKr"/>
                     </connections>
@@ -1290,7 +1335,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="EventDateTableViewController" id="qzd-np-26T" customClass="EventDateTableViewController" customModule="FullEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PNL-e7-31w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -1421,11 +1466,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="          " id="f6g-P0-Zol">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Gx3-ZU-BHX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="Gx3-ZU-BHX">
                                         <rect key="frame" x="0.0" y="234" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gx3-ZU-BHX" id="n6M-vA-vvg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-Ai-quf">
@@ -1439,7 +1484,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-67-b4j">
-                                                    <rect key="frame" x="160" y="0.0" width="205" height="50"/>
+                                                    <rect key="frame" x="160" y="0.0" width="172" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="eXT-b5-l6G"/>
                                                     </constraints>
@@ -1509,7 +1554,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Cancel" width="29" height="29"/>
         <image name="Checkmark" width="20" height="20"/>
         <image name="Dashboard" width="20" height="20"/>
         <image name="Icon-App-60x60" width="60" height="60"/>

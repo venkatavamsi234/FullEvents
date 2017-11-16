@@ -22,7 +22,8 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
     @IBOutlet weak var eventReminder: UIButton!
     
     var eventDateDelegate: PassingDatesDelegate?
-    var eventDates: EventInfo?
+    var eventInfo: EventInfo?
+    var typeOfFlow: flowType?
     
     enum DateMode: String {
         case startDate
@@ -38,19 +39,19 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        if let eventStartDate = eventDates?.eventStartDate {
-          let startDate = dateConversionToString(date: eventStartDate)
+        if let eventStartDate = eventInfo?.eventStartDate {
+            let startDate = dateConversionToString(date: eventStartDate)
             chooseDateLabel.setTitle(startDate, for: .normal)
             chosedStartDate = eventStartDate
         }
         
-        if let eventEndDate = eventDates?.eventEndDate {
+        if let eventEndDate = eventInfo?.eventEndDate {
             let endDate = dateConversionToString(date: eventEndDate)
             endDateLabel.setTitle(endDate, for: .normal)
             chosedEndDate = eventEndDate
         }
         
-        if let time = eventDates?.eventReminderTime {
+        if let time = eventInfo?.eventReminderTime {
             eventReminder.setTitle(("\(time)" + " mins"), for: .normal)
         }
         
@@ -143,16 +144,6 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
         presentDatePicker()
     }
     
- 
-    func sendTime(time: Int) {
-       let timeString = "\(time)" + " mins"
-        eventReminder.setTitle(timeString, for: .normal)
-        eventDates?.eventReminderTime = time
-        print(time)
-       eventDateDelegate?.passTime(time:time)
-    
-    }
-    
     @IBAction func presentRemainderTableViewController(_ sender: UIButton) {
         
         guard let eventRemainderVC = storyboard?.instantiateViewController(withIdentifier: "EventRemainderTableViewController") as? EventRemainderTableViewController else {
@@ -160,13 +151,22 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
         }
         
         eventRemainderVC.eventReminder = self
-        if let reminderTime = eventDates?.eventReminderTime {
+        if let reminderTime = eventInfo?.eventReminderTime {
             eventRemainderVC.selectedTime = reminderTime
         }
         let navController = UINavigationController(rootViewController: eventRemainderVC)
         self.present(navController, animated:true, completion: nil)
     }
-
+    
+    func sendTime(time: Int) {
+        let timeString = "\(time)" + " minutes"
+        eventReminder.setTitle(timeString, for: .normal)
+        eventInfo?.eventReminderTime = time
+        print(time)
+        eventDateDelegate?.passTime(time:time)
+        
+    }
+    
     @IBAction func redirectingToContactsAndStreamsVC(_ sender: UIBarButtonItem) {
         
         if (chosedStartDate != nil) && chosedEndDate != nil {
@@ -178,9 +178,8 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
                 contactsAndStreamsViewController.eventIdsDelegate = parent
                 contactsAndStreamsViewController.event = parent.event
             }
+            contactsAndStreamsViewController.typeOfFlow = typeOfFlow
             navigationController?.pushViewController(contactsAndStreamsViewController, animated: true)
-            
-            
         } else {
             let alert = UIAlertController(title: "", message: "Start date and end date is required", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction((UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)))

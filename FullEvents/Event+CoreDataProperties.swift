@@ -20,11 +20,12 @@ extension Event {
     @NSManaged public var startDate: Int64
     @NSManaged public var eventName: String
     @NSManaged public var `repeat`: NSObject?
-    @NSManaged public var remindBefore: Int64
+    @NSManaged public var remindBefore: Int16
     @NSManaged public var streamIds: [String]?
     @NSManaged public var duration: Int16
     @NSManaged public var userIds: [String]
     @NSManaged public var endDate: Int64
     @NSManaged public var day: String
+    @NSManaged public var eventId: String
 
 }

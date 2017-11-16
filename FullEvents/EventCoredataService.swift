@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 class EventService {
     
     class func saveDetails(eventDetails: EventInfo, day: String) {
@@ -33,9 +33,20 @@ class EventService {
         event.userIds = eventDetails.eventContactIds as [String]
         event.streamIds = eventDetails.eventStreamIds as [String]
         event.day = day
+        event.eventId =  UUID().uuidString
+
+        if let reminderTime = eventDetails.eventReminderTime {
+            event.remindBefore = Int16(reminderTime)
+        }
         
         do {
             try container.viewContext.save()
+            if let reminderTime = eventDetails.eventReminderTime {
+                if let reminderDate =  eventDetails.eventStartDate?.addingTimeInterval(TimeInterval(-60 * reminderTime)) {
+                    NotificationHelper.scheduleNotification(at: reminderDate, event: eventDetails, eventId: event.eventId)
+                }
+                
+            }
         }
             
         catch{

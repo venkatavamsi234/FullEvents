@@ -17,12 +17,19 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
     @IBOutlet weak var eventName: UITextField!
     @IBOutlet weak var eventDescription: UITextField!
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     var eventNameDelegate: PassingEventNameAndEventDescriptionDelegate?
-    
+    var eventInfo: EventInfo?
+    var typeOfFlow: flowType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         eventName.becomeFirstResponder()
+        if let name = eventInfo?.eventName, name != "", let desc = eventInfo?.eventDescription {
+            eventName.text = name
+            eventDescription.text = desc
+        }
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EventNameTableViewController.hideKeyboard))
         tapGesture.cancelsTouchesInView = true
         tableView.addGestureRecognizer(tapGesture)
@@ -30,6 +37,14 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
     
     override func viewWillAppear(_ animated: Bool) {
         eventName.delegate = self
+        if typeOfFlow == .create {
+            backButton.image = #imageLiteral(resourceName: "Cancel")
+            backButton.title = nil
+            navigationController?.navigationBar.topItem?.title = "New Event"
+        } else {
+            navigationController?.navigationBar.topItem?.title = "Event Info"
+            backButton.title = "Back"
+        }
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
@@ -40,7 +55,11 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
     }
     
     @IBAction func dismissEventNamePage(_ sender: UIBarButtonItem) {
+        if typeOfFlow == .create {
         self.dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     
@@ -62,12 +81,11 @@ class EventNameTableViewController: UITableViewController, UITextViewDelegate,UI
         
         if let parent = navigationController?.parent as? EventBaseViewController {
             eventDateViewController.eventDateDelegate = parent
+            eventDateViewController.eventInfo = parent.event
+            eventDateViewController.typeOfFlow = typeOfFlow
         }
         navigationController?.pushViewController(eventDateViewController, animated: true)
     
     }
-    
-    
-    
     
 }

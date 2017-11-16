@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlecrimCoreData
+import UserNotifications
 
 let container = PersistentContainer(name: "FullEvents")
 
@@ -21,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let notificationKey =  Notification.Name(rawValue: "Login Response")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {(accepted, error) in
+            if !accepted {
+                print("Notification access denied.")
+            }
+        }
         
         return true
     }
@@ -121,4 +127,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
 
