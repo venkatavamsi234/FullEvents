@@ -59,6 +59,10 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
     
     override func viewWillAppear(_ animated: Bool) {
         title = "Event Date"
+        
+        let nextButton : UIBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.plain, target: self, action: #selector(redirectingToContactsAndStreamsVC(sender:)))
+        
+        self.navigationItem.rightBarButtonItem = nextButton
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
@@ -167,7 +171,7 @@ class EventDateTableViewController: UITableViewController, DatePassingDelegate, 
         
     }
     
-    @IBAction func redirectingToContactsAndStreamsVC(_ sender: UIBarButtonItem) {
+    func redirectingToContactsAndStreamsVC(sender: UIBarButtonItem) {
         
         if (chosedStartDate != nil) && chosedEndDate != nil {
             eventDateDelegate?.passingDates(startDate: chosedStartDate! , endDate: chosedEndDate!)

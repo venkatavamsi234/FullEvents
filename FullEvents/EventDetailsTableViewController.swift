@@ -100,6 +100,10 @@ class EventDetailsTableViewController: UITableViewController {
         guard let eventContactsVC = storyboard?.instantiateViewController(withIdentifier: "ContactsAndStreamsViewController") as? ContactsAndStreamsViewController else {
             return
         }
+        guard let parent = navigationController?.parent as? EventBaseViewController else {
+            return
+        }
+        eventContactsVC.eventIdsDelegate = parent
         eventContactsVC.event = eventInfo
         eventContactsVC.typeOfFlow = typeOfFlow
         navigationController?.pushViewController(eventContactsVC, animated: true)
@@ -115,6 +119,10 @@ class EventDetailsTableViewController: UITableViewController {
             guard let eventNameVC = storyboard?.instantiateViewController(withIdentifier: "EventNameTableViewController") as? EventNameTableViewController else {
                 return
             }
+            guard let parent = navigationController?.parent as? EventBaseViewController else {
+                return
+            }
+            eventNameVC.eventNameDelegate = parent
             eventNameVC.eventInfo = eventInfo
             eventNameVC.typeOfFlow = typeOfFlow
             navigationController?.pushViewController(eventNameVC, animated: true)
@@ -124,6 +132,10 @@ class EventDetailsTableViewController: UITableViewController {
             guard let eventDateVC = storyboard?.instantiateViewController(withIdentifier: "EventDateTableViewController") as? EventDateTableViewController else {
                 return
             }
+            guard let parent = navigationController?.parent as? EventBaseViewController else {
+                return
+            }
+            eventDateVC.eventDateDelegate = parent
             eventDateVC.eventInfo = eventInfo
             eventDateVC.typeOfFlow = typeOfFlow
             navigationController?.pushViewController(eventDateVC, animated: true)

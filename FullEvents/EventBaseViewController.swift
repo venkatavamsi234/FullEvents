@@ -35,6 +35,7 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
                 
                 eventNameView.eventNameDelegate = self
                 eventNameView.typeOfFlow = .create
+                navVC.setNavigationBarHidden(false, animated: true)
                 navVC.setViewControllers([eventNameView], animated: true)
                 
             } else {
@@ -42,8 +43,9 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
                 guard let eventDetails = storyboard?.instantiateViewController(withIdentifier: "EventDetailsTableViewController") as? EventDetailsTableViewController else {
                     return
                 }
-                if let name = eventObject?.eventName, let startDate = eventObject?.startDate, let endDate = eventObject?.endDate, let attendeesCount = eventObject?.userIds.count, let reminderTime = eventObject?.remindBefore, let attendees = eventObject?.userIds, let streams = eventObject?.streamIds {
+                if let name = eventObject?.eventName, let startDate = eventObject?.startDate, let endDate = eventObject?.endDate, let attendeesCount = eventObject?.userIds.count, let reminderTime = eventObject?.remindBefore, let attendees = eventObject?.userIds, let streams = eventObject?.streamIds, let desc = eventObject?.eventDescrip {
                     event?.eventName = name
+                    event?.eventDescription =  desc
                     let startDate = Date(timeIntervalSince1970: (Double((startDate)) / 1000.0))
                     let endDate = Date(timeIntervalSince1970: (Double((endDate)) / 1000.0))
                     event?.eventStartDate = startDate
@@ -53,6 +55,7 @@ class EventBaseViewController: UIViewController, PassingEventNameAndEventDescrip
                     event?.eventContactIds = attendees
                     event?.eventStreamIds = streams
                 }
+                
                 eventDetails.eventInfo = event
                 eventDetails.typeOfFlow = .edit
                 navVC.setViewControllers([eventDetails], animated: true)

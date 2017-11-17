@@ -74,7 +74,11 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         eventBaseViewController.typeOfFlow = .create
-        self.navigationController?.present(eventBaseViewController, animated: true, completion: nil)
+        guard let controller = self.navigationController else {
+            return
+        }
+        controller.setNavigationBarHidden(false, animated: true)
+        controller.present(eventBaseViewController, animated: true, completion: nil)
         
     }
     
