@@ -46,4 +46,15 @@ class StreamService {
         save()
     }
     
+    class  func getContactObjectsUsingId(contactId: Array<String>) -> [UserStreams] {
+        var user = [UserStreams]()
+        let contactName = container.viewContext.streams
+        for contact in contactId {
+            if let userObject = contactName.first(where: {$0.id == contact}) {
+                user.append(userObject)
+            }
+        }
+        return user
+    }
+    
 }

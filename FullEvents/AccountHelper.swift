@@ -87,7 +87,7 @@
         }
     }
     
-    class func accountAPIContacts(limit: Int = 15, cursorForContacts: String? = nil) {
+    class func accountAPIContacts(limit: Int = 30, cursorForContacts: String? = nil) {
         
         guard let accountId = UserDefaults.standard.string(forKey: "accountId") else {
             return

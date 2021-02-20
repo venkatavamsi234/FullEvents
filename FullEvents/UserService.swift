@@ -8,6 +8,7 @@
 //
 import Foundation
 import AlecrimCoreData
+import CoreData
 import SwiftyJSON
 
 class UserService {
@@ -49,6 +50,19 @@ class UserService {
         }
         
         save()
-
+        
+    }
+    
+    class  func getContactObjectsUsingId(contactId: Array<String>) -> [User] {
+        var user = [User]()
+        let contactName = container.viewContext.users
+        for contact in contactId {
+            if let userObject = contactName.first(where: {$0.id == contact}) {
+                user.append(userObject)
+            }
+        }
+        return user
     }
 }
+
+

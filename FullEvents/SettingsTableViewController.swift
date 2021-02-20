@@ -128,6 +128,8 @@ class SettingsTableViewController: UITableViewController {
         
         clearCoreData(entityName: "User")
         clearCoreData(entityName: "UserStreams")
+        clearCoreData(entityName: "Event")
+        
         guard  let  lvc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
             return
         }

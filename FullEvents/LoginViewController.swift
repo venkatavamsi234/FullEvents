@@ -70,7 +70,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate, UIW
             return
         }
         
-        print("Successfullt oAuthorised")
+        print("Successfully oAuthorised")
         
         AccountHelper.accountAPICall() {
             
